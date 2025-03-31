@@ -3,10 +3,6 @@
 Welcome to my Java Data Structures and Algorithms repository! 🚀  
 This repository contains exercises and implementations for working with various data structures and algorithms, including **Stack**, **Queue**, and **BinNode**.  
 
-# Java Data Structures and Algorithms
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ## Overview
 
 This repository contains implementations of various data structures and algorithms in Java. It serves as both a learning resource and a reference for common computer science concepts.
