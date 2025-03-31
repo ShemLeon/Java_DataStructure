@@ -69,10 +69,6 @@ int index = Sorting.binary_search(arr, 5);      // returns index of element 5
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Contact
 
 If you have any questions or suggestions, please feel free to reach out.
