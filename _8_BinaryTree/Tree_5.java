@@ -1,10 +1,9 @@
-
 package _8_BinaryTree;
-import unit4.collectionsLib.BinNode;
 
-// .3 כתוב פונקציה שמקבלת עץ בינארי המכיל מספרים שלמים ומחזירה את מספר בנים
-//ימניים בעץ.
-public class Tree_3  {
+import unit4.collectionsLib.BinNode;
+/*//     כתוב פונקציה שמקבלת עץ בינארי המכיל מספרים שלמים ומחזירה את מספר בנים
+        היחידים בעץ.*/
+public class Tree_5  {
     public static void main(String[] args) {
         // Создаем бинарное дерево
         BinNode<Integer> root = new BinNode<>(10);

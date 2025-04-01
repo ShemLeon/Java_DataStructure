@@ -1,4 +1,4 @@
-package _7_BinNode;
+package _8_BinaryTree;
 
 import unit4.collectionsLib.BinNode;
 

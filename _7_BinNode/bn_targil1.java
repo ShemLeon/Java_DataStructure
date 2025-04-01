@@ -1,4 +1,5 @@
 package _7_BinNode;
+import unit4.collectionsLib.BinNode;
 
 // Write a function that takes an int n and returns a BinNode of consecutive integers
 public class bn_targil1 {
