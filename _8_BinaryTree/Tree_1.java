@@ -7,7 +7,7 @@ import unit4.collectionsLib.BinNode;
  * - Печать списка в обоих направлениях
  * - Добавление узлов в список
  */
-public class BiinNode_1 {
+public class Tree_1 {
     public static void main(String[] args) {
         // Создаем тестовый список из массива
         int[] arr = {1, 2, 3, 4, 5};
