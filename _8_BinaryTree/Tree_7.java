@@ -1,5 +1,7 @@
 package _8_BinaryTree;
-
+import unit4.binTreeUtilsLib.*;
+import unit4.binTreeCanvasLib.*;
+import unit4.collectionsLib.*;
 import unit4.collectionsLib.BinNode;
 //
 //כתוב פונקציה שמקבלת עץ בינארי המכיל מספרים שלמים ומחזירה את מספר סבים
