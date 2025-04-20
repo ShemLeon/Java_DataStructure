@@ -15,11 +15,12 @@ public class Tree {
         System.out.println("5. «Единственных» потомков в бинарном дереве: " + count_Final_Dots(t1));
         System.out.println("6. Количество «родителей» с двумя детьми в бинарном дереве: " + count_double_dots(t1));
         System.out.println("7. Количество «дедов» в бинарном дереве: " + count_Grandfathers(t1));
-
-
-        System.out.println("8. Узлы с четными значениями: " + countEvenNodes(t1));
-        System.out.println("Узлы с с значениями больше X: " + countNodesGreaterThanX(t1, 5));
-        System.out.println("11. Узлы со значением меньше родителя: " + countNodesLessThanParent(t1));
+        System.out.println("8. Количество узлов с четными значениями: " + countEvenNodes(t1));
+        System.out.println("9.  Количество узлов с значениями больше X: " + countNodesGreaterX(t1, 5));
+        System.out.println("10. Количество узлов значение которых содержит число 5: " + countNodesFive(t1));
+        System.out.println("11. Количество узлов со значением меньше родителя: " + countNodesLessThanParent(t1));
+        System.out.println("12. Количество узлов с у которых значение не равно их «брату»:"  + countNodesDifferentBrother(t1));
+        System.out.println("13. Количество узлов, которые делятся без остатка на одного из детей:"  + countNodesDivChildren(t1));
     }
 
     public static void printPre_Order(BinNode<Integer> head) {
@@ -135,22 +136,19 @@ public class Tree {
         return false;
     }
 
-// второй вариант: количество "дедов"
-    public static int count_grends(BinNode<Integer> head) {
+    // второй вариант: количество "дедов"
+    public static int count_grands(BinNode<Integer> head) {
         if (head == null) return 0;
         if(head.hasRight())
             return (head.getRight().hasRight()||head.getRight().hasLeft() ? 1:0)
-                    + count_grends(head.getLeft()) + count_grends(head.getRight());
+                    + count_grands(head.getLeft()) + count_grands(head.getRight());
         return (head.hasLeft() && (head.getLeft().hasRight()||head.getLeft().hasLeft()) ? 1 : 0)
-                + count_grends(head.getLeft()) + count_grends(head.getRight());
+                + count_grands(head.getLeft()) + count_grands(head.getRight());
     }
 
 
-
-
-
-    // задание 8
-//    Возвращает количество узлов с четными значениями в дереве.
+    // Задание 8
+    // Возвращает количество узлов с четными значениями в дереве.
     public static int countEvenNodes(BinNode<Integer> head) {
         if (head == null) return 0;
         
@@ -163,58 +161,94 @@ public class Tree {
                countEvenNodes(head.getRight());
     }
 
-    // задание 9
-    //    Напишите функцию, которая получает бинарное дерево, содержащее целые числа,
-    //    и возвращает количество узлов со значениями больше заданного X.
-    public static int countNodesGreaterThanX(BinNode<Integer> head, int x) {
+    // Задание 9
+    // Возвращает количество узлов со значениями больше заданного X.
+    public static int countNodesGreaterX(BinNode<Integer> head, int x) {
         if (head == null) return 0;
-
         // Проверяем, больше ли значение текущего узла чем X
         int currentNodeContribution = (head.getValue() > x) ? 1 : 0;
-
         // Рекурсивно считаем узлы со значениями больше X в левом и правом поддеревьях
         return currentNodeContribution +
-                countNodesGreaterThanX(head.getLeft(), x) +
-                countNodesGreaterThanX(head.getRight(), x);
+                countNodesGreaterX(head.getLeft(), x) +
+                countNodesGreaterX(head.getRight(), x);
     }
 
-    // задание 10
-    //  возвращает количество узлов  значение которого содержит число 5.
-    public static int countNodesWithValue5(BinNode<Integer> head) {
+    // Задание 10
+    // Возвращает количество узлов значение которых содержит число 5.
+    public static int countNodesFive(BinNode<Integer> head) {
         if (head == null) return 0;
-        
         // Проверяем, равно ли значение текущего узла 5
-        int currentNodeContribution = (head.getValue() == 5) ? 1 : 0;
-        
+        int currentNodeContribution = 0;
+        int temp = head.getValue();
+        while (temp>0){
+            if (temp%5==0) {
+                currentNodeContribution++;
+                break;
+            }
+            temp /=10;
+        }
         // Рекурсивно считаем узлы со значением 5 в левом и правом поддеревьях
         return currentNodeContribution + 
-               countNodesWithValue5(head.getLeft()) + 
-               countNodesWithValue5(head.getRight());
+               countNodesFive(head.getLeft()) +
+               countNodesFive(head.getRight());
     }
 
-    // задание 11
+    // Задание 11
     // Напишите функцию, которая получает бинарное дерево, содержащее целые числа, и возвращает количество узлов,
     // значение которых меньше значения их родителя.
     public static int countNodesLessThanParent(BinNode<Integer> head) {
         if (head == null) return 0;
-        
         // Корень не включаем в подсчет, так как у него нет родителя
         return countNodesLessThanParentHelper(head.getLeft(), head.getValue()) + 
                countNodesLessThanParentHelper(head.getRight(), head.getValue());
     }
-    
     private static int countNodesLessThanParentHelper(BinNode<Integer> current, int parentValue) {
         if (current == null) return 0;
-        
         // Проверяем, меньше ли значение текущего узла чем значение родителя
         int currentNodeContribution = (current.getValue() < parentValue) ? 1 : 0;
-        
         // Получаем значение текущего узла для передачи в рекурсивные вызовы
         int currentValue = current.getValue();
-        
         // Рекурсивно считаем узлы с значениями меньше родителя в левом и правом поддеревьях
         return currentNodeContribution + 
                countNodesLessThanParentHelper(current.getLeft(), currentValue) + 
                countNodesLessThanParentHelper(current.getRight(), currentValue);
     }
+    // Задание 12
+    // Возвращает количество узлов, значение которых не равно значению их "брата".
+       private static int countNodesDifferentBrother(BinNode<Integer> current) {
+        if (current == null) return 0;
+        int count =0;
+
+        // Проверяем, имеет ли текущий узел 2 "братьев"
+        if (current.hasRight() && current.hasLeft()) {
+            if (current.getLeft().getValue() != current.getRight().getValue())
+                count++;
+        }
+        // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
+        return count +
+                countNodesDifferentBrother(current.getLeft()) +
+                countNodesDifferentBrother(current.getRight());
+    }
+
+    // Задание 13
+    // Возвращает количество узлов, значение которых не равно значению их "брата".
+    private static int countNodesDivChildren(BinNode<Integer> current) {
+        if (current == null) return 0;
+        boolean flag = false;
+        // Проверяем, имеет ли текущий узел хотя бы 1 ребенка
+        if (current.hasLeft()) {
+            if (current.getValue() % current.getLeft().getValue() == 0)
+                 flag = true;
+        }
+        if (current.hasRight()) {
+            if (current.getValue() % current.getRight().getValue() == 0)
+                flag = true;
+        }
+        int currentNodeContribution = (flag) ? 1 : 0;
+        // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
+        return currentNodeContribution +
+                countNodesDivChildren(current.getLeft()) +
+                countNodesDivChildren(current.getRight());
+    }
+
 }
