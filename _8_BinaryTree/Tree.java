@@ -22,6 +22,7 @@ public class Tree {
         System.out.println("12. Количество узлов с у которых значение не равно их «брату»:"  + countNodesDifferentBrother(t1));
         System.out.println("13. Количество узлов, которые делятся без остатка на одного из детей:"  + countNodesDivChildren(t1));
         System.out.println("14. Количество узлов, сумма детей которых нечетная:"  + countNodesChildrenSumNotEven(t1));
+        System.out.println("15. Количество узлов, 1 из детей которых лист:"  + countNodesWithLeafs(t1));
 
     }
 
@@ -194,7 +195,6 @@ public class Tree {
                countNodesFive(head.getLeft()) +
                countNodesFive(head.getRight());
     }
-
     // Задание 11
     // Напишите функцию, которая получает бинарное дерево, содержащее целые числа, и возвращает количество узлов,
     // значение которых меньше значения их родителя.
@@ -204,7 +204,7 @@ public class Tree {
         return countNodesLessThanParentHelper(head.getLeft(), head.getValue()) + 
                countNodesLessThanParentHelper(head.getRight(), head.getValue());
     }
-    private static int countNodesLessThanParentHelper(BinNode<Integer> current, int parentValue) {
+    public static int countNodesLessThanParentHelper(BinNode<Integer> current, int parentValue) {
         if (current == null) return 0;
         // Проверяем, меньше ли значение текущего узла чем значение родителя
         int currentNodeContribution = (current.getValue() < parentValue) ? 1 : 0;
@@ -217,7 +217,7 @@ public class Tree {
     }
     // Задание 12
     // Возвращает количество узлов, значение которых не равно значению их "брата".
-       private static int countNodesDifferentBrother(BinNode<Integer> current) {
+    public static int countNodesDifferentBrother(BinNode<Integer> current) {
         if (current == null) return 0;
         int count =0;
 
@@ -234,7 +234,7 @@ public class Tree {
 
     // Задание 13
     // Возвращает количество узлов, которые делятся без остатка на одного из детей
-    private static int countNodesDivChildren(BinNode<Integer> current) {
+    public static int countNodesDivChildren(BinNode<Integer> current) {
         if (current == null) return 0;
         boolean flag = false;
         // Проверяем, имеет ли текущий узел хотя бы 1 ребенка
@@ -255,23 +255,38 @@ public class Tree {
 
     // Задание 14
     // Возвращает количество узлов, сумма детей которых нечетная
-    private static int countNodesChildrenSumNotEven(BinNode<Integer> current) {
+    public static int countNodesChildrenSumNotEven(BinNode<Integer> current) {
         if (current == null) return 0;
-        boolean flag = false;
         // Проверяем, имеет ли текущий узел хотя бы 1 ребенка
-        if (current.hasLeft()) {
-            if (current.getValue() % current.getLeft().getValue() == 0)
-                flag = true;
-        }
-        if (current.hasRight()) {
-            if (current.getValue() % current.getRight().getValue() == 0)
-                flag = true;
-        }
-        int currentNodeContribution = (flag) ? 1 : 0;
+        if (!(current.hasRight() || current.hasLeft())) return 0;
+        int sum = 0;
+        if (current.hasLeft())
+            sum +=current.getLeft().getValue();
+        if (current.hasRight())
+            sum +=current.getRight().getValue();
+        int currentNodeContribution = (sum%2 !=0) ? 1 : 0;
         // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
         return currentNodeContribution +
-                countNodesDivChildren(current.getLeft()) +
-                countNodesDivChildren(current.getRight());
+                countNodesChildrenSumNotEven(current.getLeft()) +
+                countNodesChildrenSumNotEven(current.getRight());
     }
 
+    // Задание 15
+    // Возвращает количество узлов,у которых хотя-бы 1 ребенок - лист
+    public static int countNodesWithLeafs(BinNode<Integer> current){
+        if (current==null) return 0;
+        int count=0;
+        if (current.hasLeft()){
+            BinNode<Integer> left = current.getLeft();
+            if ( !left.hasLeft() && !left.hasRight()) count++;
+        }
+        if (current.hasRight()){
+            BinNode<Integer> right = current.getRight();
+            if ( !right.hasLeft() && !right.hasRight()) count++;
+        }
+
+        return (count > 0 ? 1 : 0) +
+                countNodesWithLeafs(current.getLeft()) +
+                countNodesWithLeafs(current.getRight());
+    }
 }
