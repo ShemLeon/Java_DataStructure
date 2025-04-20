@@ -24,7 +24,10 @@ public class Tree {
         System.out.println("14. Количество узлов, сумма детей которых нечетная:"  + countNodesChildrenSumNotEven(t1));
         System.out.println("15. Количество узлов, 1 из детей которых лист:"  + countNodesWithLeafs(t1));
         System.out.println("16. Количество узлов, у которых число листьев в левом поддереве больше, чем в правом:"  +  countNodesLeftLeavesMore(t1));
+        System.out.println("17. Количество узлов, у которых число листьев в правом поддереве меньше значения самого узла:"  +  countNodesRightLeavesLessThanValue(t1));
+        System.out.println("18. Высота дерева:"  +  countNodesRightLeavesLessThanValue(t1));
 
+        // Функция для "подсчета высоты дерева"
     }
 
     public static void printPre_Order(BinNode<Integer> head) {
@@ -135,11 +138,9 @@ public class Tree {
             if (node.getRight().getLeft() != null || node.getRight().getRight() != null)
                 return true;
         }
-
         // Если ни у левого, ни у правого ребенка нет детей, то у узла нет внуков
         return false;
     }
-
     // второй вариант: количество "дедов"
     public static int count_grands(BinNode<Integer> head) {
         if (head == null) return 0;
@@ -149,7 +150,6 @@ public class Tree {
         return (head.hasLeft() && (head.getLeft().hasRight()||head.getLeft().hasLeft()) ? 1 : 0)
                 + count_grands(head.getLeft()) + count_grands(head.getRight());
     }
-
 
     // Задание 8
     // Возвращает количество узлов с четными значениями в дереве.
@@ -328,5 +328,8 @@ public class Tree {
                 + countNodesRightLeavesLessThanValue(current.getLeft())
                 + countNodesRightLeavesLessThanValue(current.getRight());
     }
+    // Задание 18
+    // Функция для "подсчета высоты дерева"
+
 
 }
