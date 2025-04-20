@@ -21,6 +21,8 @@ public class Tree {
         System.out.println("11. Количество узлов со значением меньше родителя: " + countNodesLessThanParent(t1));
         System.out.println("12. Количество узлов с у которых значение не равно их «брату»:"  + countNodesDifferentBrother(t1));
         System.out.println("13. Количество узлов, которые делятся без остатка на одного из детей:"  + countNodesDivChildren(t1));
+        System.out.println("14. Количество узлов, сумма детей которых нечетная:"  + countNodesChildrenSumNotEven(t1));
+
     }
 
     public static void printPre_Order(BinNode<Integer> head) {
@@ -231,7 +233,7 @@ public class Tree {
     }
 
     // Задание 13
-    // Возвращает количество узлов, значение которых не равно значению их "брата".
+    // Возвращает количество узлов, которые делятся без остатка на одного из детей
     private static int countNodesDivChildren(BinNode<Integer> current) {
         if (current == null) return 0;
         boolean flag = false;
@@ -239,6 +241,27 @@ public class Tree {
         if (current.hasLeft()) {
             if (current.getValue() % current.getLeft().getValue() == 0)
                  flag = true;
+        }
+        if (current.hasRight()) {
+            if (current.getValue() % current.getRight().getValue() == 0)
+                flag = true;
+        }
+        int currentNodeContribution = (flag) ? 1 : 0;
+        // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
+        return currentNodeContribution +
+                countNodesDivChildren(current.getLeft()) +
+                countNodesDivChildren(current.getRight());
+    }
+
+    // Задание 14
+    // Возвращает количество узлов, сумма детей которых нечетная
+    private static int countNodesChildrenSumNotEven(BinNode<Integer> current) {
+        if (current == null) return 0;
+        boolean flag = false;
+        // Проверяем, имеет ли текущий узел хотя бы 1 ребенка
+        if (current.hasLeft()) {
+            if (current.getValue() % current.getLeft().getValue() == 0)
+                flag = true;
         }
         if (current.hasRight()) {
             if (current.getValue() % current.getRight().getValue() == 0)
