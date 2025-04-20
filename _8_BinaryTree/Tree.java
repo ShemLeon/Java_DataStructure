@@ -23,6 +23,7 @@ public class Tree {
         System.out.println("13. Количество узлов, которые делятся без остатка на одного из детей:"  + countNodesDivChildren(t1));
         System.out.println("14. Количество узлов, сумма детей которых нечетная:"  + countNodesChildrenSumNotEven(t1));
         System.out.println("15. Количество узлов, 1 из детей которых лист:"  + countNodesWithLeafs(t1));
+        System.out.println("16. Количество узлов, у которых число листьев в левом поддереве больше, чем в правом:"  +  countNodesLeftLeavesMore(t1));
 
     }
 
@@ -289,4 +290,29 @@ public class Tree {
                 countNodesWithLeafs(current.getLeft()) +
                 countNodesWithLeafs(current.getRight());
     }
+
+    // Задание 16
+    // Возвращает количество узлов,у которых количество листьев в левом поддереве больше, чем в правом поддереве.
+    /*
+     * @param current - текущий узел дерева
+     * @return количество таких узлов
+     * Принцип работы:
+     * 1. Если узел пустой — возвращаем 0.
+     * 2. Для текущего узла считаем количество листьев в левом и правом поддеревьях через вспомогательную ф-ю.
+     * 3. Если в левом больше, увеличиваем счетчик.
+     * 4. Рекурсивно вызываем функцию для левого и правого поддерева.
+     */
+    public static int countNodesLeftLeavesMore(BinNode<Integer> current){
+        if (current == null) return 0;
+        int leftLeaves = countLeaves(current.getLeft());
+        int rightLeaves = countLeaves(current.getRight());
+        int currentNodeContribution = (leftLeaves > rightLeaves) ? 1 : 0;
+        return currentNodeContribution
+                + countNodesLeftLeavesMore(current.getLeft())
+                + countNodesLeftLeavesMore(current.getRight());
+    }
+
+    // Задание 17
+
+
 }
