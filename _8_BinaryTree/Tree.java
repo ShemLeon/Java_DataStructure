@@ -313,6 +313,20 @@ public class Tree {
     }
 
     // Задание 17
-
+    /* Функция для "подсчета количества узлов, у которых число листьев в правом поддереве меньше значения самого узла"
+     * Принцип работы:
+     * 1. Если узел пустой — возвращаем 0.
+     * 2. Считаем количество листьев в правом поддереве.
+     * 3. Если это количество меньше значения текущего узла — увеличиваем счетчик.
+     * 4. Рекурсивно вызываем функцию для левого и правого поддерева.
+     */
+    public static int countNodesRightLeavesLessThanValue(BinNode<Integer> current) {
+        if (current == null) return 0;
+        int rightLeaves = countLeaves(current.getRight());
+        int currentNodeContribution = (rightLeaves < current.getValue()) ? 1 : 0;
+        return currentNodeContribution
+                + countNodesRightLeavesLessThanValue(current.getLeft())
+                + countNodesRightLeavesLessThanValue(current.getRight());
+    }
 
 }
