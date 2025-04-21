@@ -25,9 +25,12 @@ public class Tree {
         System.out.println("15. Количество узлов, 1 из детей которых лист:"  + countNodesWithLeafs(t1));
         System.out.println("16. Количество узлов, у которых число листьев в левом поддереве больше, чем в правом:"  +  countNodesLeftLeavesMore(t1));
         System.out.println("17. Количество узлов, у которых число листьев в правом поддереве меньше значения самого узла:"  +  countNodesRightLeavesLessThanValue(t1));
-        System.out.println("18. Высота дерева:"  +  countNodesRightLeavesLessThanValue(t1));
+        System.out.println("18. Высота дерева:"  +  getTreeHeight(t1));
+        System.out.println("19. Отзеркаливание дерева:"  +  mirrorTree(t1));
+        System.out.println("20. Проверка, что все узлы четные:"  +  mirrorTree(t1));
 
-        // Функция для "подсчета высоты дерева"
+
+
     }
 
     public static void printPre_Order(BinNode<Integer> head) {
@@ -322,14 +325,43 @@ public class Tree {
      */
     public static int countNodesRightLeavesLessThanValue(BinNode<Integer> current) {
         if (current == null) return 0;
+        // Не считаем листья
+        if (!current.hasLeft() && !current.hasRight()) return 0;
+        // Не считаем, если правого поддерева нет
+        if (!current.hasRight())
+            return countNodesRightLeavesLessThanValue(current.getLeft()) +
+                    countNodesRightLeavesLessThanValue(current.getRight());
+
         int rightLeaves = countLeaves(current.getRight());
         int currentNodeContribution = (rightLeaves < current.getValue()) ? 1 : 0;
+
         return currentNodeContribution
                 + countNodesRightLeavesLessThanValue(current.getLeft())
                 + countNodesRightLeavesLessThanValue(current.getRight());
     }
     // Задание 18
     // Функция для "подсчета высоты дерева"
+    public static int getTreeHeight(BinNode<Integer> current){
+        if (current==null) return 0;
+        int leftHeight = getTreeHeight(current.getLeft());
+        int rightHeight = getTreeHeight(current.getRight());
+        return  1 + Math.max(leftHeight, rightHeight);
+    }
+    // Задание 19
+    // Построение зеркального дерева
+    public static BinNode<Integer> mirrorTree(BinNode<Integer> current) {
+        if (current == null) return null;
+        BinNode<Integer> mirrored = new BinNode<>(current.getValue());
+        mirrored.setLeft(mirrorTree(current.getRight()));
+        mirrored.setRight(mirrorTree(current.getLeft()));
+        return mirrored;
+    }
 
-
+    // Задание 20
+    // Проверка, что все узлы четные:"
+    public static boolean isAllEven(BinNode<Integer> current) {
+        if (current == null) return true;
+        if (current.getValue() % 2 != 0) return false;
+        return isAllEven(current.getLeft()) && isAllEven(current.getRight());
+    }
 }
