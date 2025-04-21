@@ -27,9 +27,9 @@ public class Tree {
         System.out.println("17. Количество узлов, у которых число листьев в правом поддереве меньше значения самого узла:"  +  countNodesRightLeavesLessThanValue(t1));
         System.out.println("18. Высота дерева:"  +  getTreeHeight(t1));
         System.out.println("19. Отзеркаливание дерева:"  +  mirrorTree(t1));
-        System.out.println("20. Проверка, что все узлы четные:"  +  mirrorTree(t1));
-
-
+        System.out.println("20. Проверка, что все узлы четные:"  +  isAllEven(t1));
+        System.out.println("21. Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"  +  hasNodeWithDigitsSumDiv5(t1));
+        System.out.println("22. Проверки, что все узлы дерева удовлетворяют трём условиям\":"  +  checkAllConditions(t1));
 
     }
 
@@ -364,4 +364,68 @@ public class Tree {
         if (current.getValue() % 2 != 0) return false;
         return isAllEven(current.getLeft()) && isAllEven(current.getRight());
     }
+    // Задание 21
+    // Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"
+    public static boolean hasNodeWithDigitsSumDiv5(BinNode<Integer> current) {
+        if (current == null) return false;
+        if (sumOfDigits(current.getValue()) % 5 == 0) return true;
+        return hasNodeWithDigitsSumDiv5(current.getLeft()) || hasNodeWithDigitsSumDiv5(current.getRight());
+    }
+
+    /* Вспомогательная функция для подсчёта суммы цифр числа */
+    public static int sumOfDigits(int n) {
+        n = Math.abs(n);
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+    // Задание 22
+    /* Функция для "проверки, что все узлы дерева удовлетворяют трём условиям"
+     * @param current - корень дерева
+     * @return true, если все условия выполняются для всех узлов, иначе false
+     * Условия:
+     * 1. Цифры значения узла идут по убыванию (от старшей к младшей).
+     * 2. Количество листьев в правом поддереве <= значению узла.
+     * 3. Сумма всех левых потомков (прямых детей) чётная.
+     * Принцип работы:
+     * 1. Если узел пустой — возвращаем true.
+     * 2. Проверяем три условия для текущего узла.
+     * 3. Рекурсивно проверяем левое и правое поддерево.
+     */
+    public static boolean checkAllConditions(BinNode<Integer> current) {
+        if (current == null) return true;
+
+        // 1. Проверка, что цифры идут по убыванию
+        if (!isDigitsDecreasing(current.getValue())) return false;
+
+        // 2. Количество листьев в правом поддереве <= значению узла
+        int rightLeaves = countLeaves(current.getRight());
+        if (rightLeaves > current.getValue()) return false;
+
+        // 3. Сумма всех левых потомков чётная
+        int leftSum = 0;
+        if (current.hasLeft()) leftSum += current.getLeft().getValue();
+        if (current.hasRight()) leftSum += current.getRight().getValue();
+        if (leftSum % 2 != 0) return false;
+
+        // Рекурсивно проверяем поддеревья
+        return checkAllConditions(current.getLeft()) && checkAllConditions(current.getRight());
+    }
+
+    /* Вспомогательная функция: проверяет, что цифры числа идут по убыванию */
+    public static boolean isDigitsDecreasing(int n) {
+        int prev = 10;
+        while (n > 0) {
+            int digit = n % 10;
+            if (digit >= prev) return false;
+            prev = digit;
+            n /= 10;
+        }
+        return true;
+    }
+
+
 }
