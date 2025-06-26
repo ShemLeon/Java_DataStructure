@@ -25,7 +25,7 @@ public class Tree {
         System.out.println("8. Количество узлов с четными значениями: " + countEvenNodes(t1));
         System.out.println("9.  Количество узлов с значениями больше X: " + countNodesGreaterX(t1, 5));
         System.out.println("10. Количество узлов значение которых содержит число 5: " + countNodesFive(t1));
-        System.out.println("11. Количество узлов со значением меньше родителя: " + countNodesLessThanParent(t1));
+        System.out.println("11. Количество узлов со значением меньше родителя: " + countNodesLessParent(t1));
         System.out.println("12. Количество узлов с у которых значение не равно их «брату»:"  + countNodesDifferentBrother(t1));
         System.out.println("13. Количество узлов, которые делятся без остатка на одного из детей:"  + countNodesDivChildren(t1));
         System.out.println("14. Количество узлов, сумма детей которых нечетная:"  + countNodesChildrenSumNotEven(t1));
@@ -35,7 +35,7 @@ public class Tree {
         System.out.println("18. Высота дерева:"  +  getTreeHeight(t1));
         System.out.println("19. Отзеркаливание дерева:"  +  mirrorTree(t1));
         System.out.println("20. Проверка, что все узлы четные:"  +  isAllEven(t1));
-        System.out.println("21. Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"  +  hasNodeWithDigitsSumDiv5(t1));
+        System.out.println("21. Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"  +  hasSumDivFive(t1));
         System.out.println("22. Проверки, что все узлы дерева удовлетворяют трём условиям\":"  +  checkAllConditions(t1));
     }
 
@@ -160,7 +160,6 @@ public class Tree {
         if (t == null) return 0;
         // Проверяем, является ли значение текущего узла четным (делится на 2 без остатка)
         int currentNodeContribution = (t.getValue() % 2 == 0) ? 1 : 0;
-        
         // Рекурсивно считаем четные узлы в левом и правом поддеревьях
         return currentNodeContribution
                 + countEvenNodes(t.getLeft())
@@ -202,13 +201,13 @@ public class Tree {
     // Задание 11
     // Напишите функцию, которая получает бинарное дерево, содержащее целые числа, и возвращает количество узлов,
     // значение которых меньше значения их родителя.
-    public static int countNodesLessThanParent(BinNode<Integer> t) {
+    public static int countNodesLessParent(BinNode<Integer> t) {
         if (t == null) return 0;
         // Корень не включаем в подсчет, так как у него нет родителя
-        return countNodesLessThanParentHelper(t.getLeft(), t.getValue()) + 
-               countNodesLessThanParentHelper(t.getRight(), t.getValue());
+        return countHelper(t.getLeft(), t.getValue()) +
+                + countHelper(t.getRight(), t.getValue());
     }
-    public static int countNodesLessThanParentHelper(BinNode<Integer> current, int parentValue) {
+    public static int countHelper(BinNode<Integer> current, int parentValue) {
         if (current == null) return 0;
         // Проверяем, меньше ли значение текущего узла чем значение родителя
         int currentNodeContribution = (current.getValue() < parentValue) ? 1 : 0;
@@ -216,9 +215,10 @@ public class Tree {
         int currentValue = current.getValue();
         // Рекурсивно считаем узлы с значениями меньше родителя в левом и правом поддеревьях
         return currentNodeContribution + 
-               countNodesLessThanParentHelper(current.getLeft(), currentValue) + 
-               countNodesLessThanParentHelper(current.getRight(), currentValue);
+               + countHelper(current.getLeft(), currentValue)
+               + countHelper(current.getRight(), currentValue);
     }
+
     // Задание 12
     // Возвращает количество узлов, значение которых не равно значению их "брата".
     public static int countNodesDifferentBrother(BinNode<Integer> current) {
@@ -232,8 +232,8 @@ public class Tree {
         }
         // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
         return count +
-                countNodesDifferentBrother(current.getLeft()) +
-                countNodesDifferentBrother(current.getRight());
+                + countNodesDifferentBrother(current.getLeft())
+                + countNodesDifferentBrother(current.getRight());
     }
 
     // Задание 13
@@ -251,60 +251,53 @@ public class Tree {
                 flag = true;
         }
         int currentNodeContribution = (flag) ? 1 : 0;
-        // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
+        // Рекурсивно считаем узлы в левом и правом поддеревьях
         return currentNodeContribution +
-                countNodesDivChildren(current.getLeft()) +
-                countNodesDivChildren(current.getRight());
+                + countNodesDivChildren(current.getLeft())
+                + countNodesDivChildren(current.getRight());
     }
 
     // Задание 14
     // Возвращает количество узлов, сумма детей которых нечетная
-    public static int countNodesChildrenSumNotEven(BinNode<Integer> current) {
-        if (current == null) return 0;
+    public static int countNodesChildrenSumNotEven(BinNode<Integer> t) {
+        if (t == null) return 0;
         // Проверяем, имеет ли текущий узел хотя бы 1 ребенка
-        if (!(current.hasRight() || current.hasLeft())) return 0;
+        if (!(t.hasRight() || t.hasLeft())) return 0;
         int sum = 0;
-        if (current.hasLeft())
-            sum +=current.getLeft().getValue();
-        if (current.hasRight())
-            sum +=current.getRight().getValue();
+        if (t.hasLeft())
+            sum += t.getLeft().getValue();
+        if (t.hasRight())
+            sum += t.getRight().getValue();
         int currentNodeContribution = (sum%2 !=0) ? 1 : 0;
         // Рекурсивно считаем узлы с разными значениями братьев в левом и правом поддеревьях
         return currentNodeContribution +
-                countNodesChildrenSumNotEven(current.getLeft()) +
-                countNodesChildrenSumNotEven(current.getRight());
+                + countNodesChildrenSumNotEven(t.getLeft())
+                + countNodesChildrenSumNotEven(t.getRight());
     }
 
     // Задание 15
     // Возвращает количество узлов,у которых хотя-бы 1 ребенок - лист
-    public static int countNodesWithLeafs(BinNode<Integer> current){
-        if (current==null) return 0;
+    public static int countNodesWithLeafs(BinNode<Integer> t){
+        if (t==null) return 0;
         int count=0;
-        if (current.hasLeft()){
-            BinNode<Integer> left = current.getLeft();
+        if (t.hasLeft()){
+            BinNode<Integer> left = t.getLeft();
             if ( !left.hasLeft() && !left.hasRight()) count++;
         }
-        if (current.hasRight()){
-            BinNode<Integer> right = current.getRight();
+        if (t.hasRight()){
+            BinNode<Integer> right = t.getRight();
             if ( !right.hasLeft() && !right.hasRight()) count++;
         }
 
         return (count > 0 ? 1 : 0) +
-                countNodesWithLeafs(current.getLeft()) +
-                countNodesWithLeafs(current.getRight());
+               + countNodesWithLeafs(t.getLeft())
+               + countNodesWithLeafs(t.getRight());
     }
 
     // Задание 16
-    // Возвращает количество узлов,у которых количество листьев в левом поддереве больше, чем в правом поддереве.
-    /*
-     * @param current - текущий узел дерева
-     * @return количество таких узлов
-     * Принцип работы:
-     * 1. Если узел пустой — возвращаем 0.
-     * 2. Для текущего узла считаем количество листьев в левом и правом поддеревьях через вспомогательную ф-ю.
-     * 3. Если в левом больше, увеличиваем счетчик.
-     * 4. Рекурсивно вызываем функцию для левого и правого поддерева.
-     */
+    // Возвращает количество узлов,у которых количество листьев в левом поддереве больше, чем в правом.
+    // Делим дерево на лево и право, а дальше используем вспомогательную функцию из ex2
+
     public static int countNodesLeftLeavesMore(BinNode<Integer> current){
         if (current == null) return 0;
         int leftLeaves = countLeaves(current.getLeft());
@@ -316,29 +309,24 @@ public class Tree {
     }
 
     // Задание 17
-    /* Функция для "подсчета количества узлов, у которых число листьев в правом поддереве меньше значения самого узла"
-     * Принцип работы:
-     * 1. Если узел пустой — возвращаем 0.
-     * 2. Считаем количество листьев в правом поддереве.
-     * 3. Если это количество меньше значения текущего узла — увеличиваем счетчик.
-     * 4. Рекурсивно вызываем функцию для левого и правого поддерева.
-     */
-    public static int countNodesRightLeavesLessThanValue(BinNode<Integer> current) {
-        if (current == null) return 0;
+    // Функция для "подсчета количества узлов, у которых число листьев в правом поддереве меньше значения самого узла"
+    public static int countNodesRightLeavesLessThanValue(BinNode<Integer> t) {
+        if (t == null) return 0;
         // Не считаем листья
-        if (!current.hasLeft() && !current.hasRight()) return 0;
+        if (!t.hasLeft() && !t.hasRight()) return 0;
         // Не считаем, если правого поддерева нет
-        if (!current.hasRight())
-            return countNodesRightLeavesLessThanValue(current.getLeft()) +
-                    countNodesRightLeavesLessThanValue(current.getRight());
+        if (!t.hasRight())
+            return countNodesRightLeavesLessThanValue(t.getLeft()) +
+                    countNodesRightLeavesLessThanValue(t.getRight());
 
-        int rightLeaves = countLeaves(current.getRight());
-        int currentNodeContribution = (rightLeaves < current.getValue()) ? 1 : 0;
+        int rightLeaves = countLeaves(t.getRight());
+        int pointResult = (rightLeaves < t.getValue()) ? 1 : 0;
 
-        return currentNodeContribution
-                + countNodesRightLeavesLessThanValue(current.getLeft())
-                + countNodesRightLeavesLessThanValue(current.getRight());
+        return pointResult
+                + countNodesRightLeavesLessThanValue(t.getLeft())
+                + countNodesRightLeavesLessThanValue(t.getRight());
     }
+
     // Задание 18
     // Функция для "подсчета высоты дерева"
     public static int getTreeHeight(BinNode<Integer> current){
@@ -347,34 +335,36 @@ public class Tree {
         int rightHeight = getTreeHeight(current.getRight());
         return  1 + Math.max(leftHeight, rightHeight);
     }
+
     // Задание 19
     // Построение зеркального дерева
-    public static BinNode<Integer> mirrorTree(BinNode<Integer> current) {
-        if (current == null) return null;
-        BinNode<Integer> mirrored = new BinNode<>(current.getValue());
-        mirrored.setLeft(mirrorTree(current.getRight()));
-        mirrored.setRight(mirrorTree(current.getLeft()));
+    public static BinNode<Integer> mirrorTree(BinNode<Integer> t) {
+        if (t == null) return null;
+        BinNode<Integer> mirrored = new BinNode<>(t.getValue());
+        mirrored.setLeft(mirrorTree(t.getRight()));
+        mirrored.setRight(mirrorTree(t.getLeft()));
         return mirrored;
     }
 
     // Задание 20
     // Проверка, что все узлы четные:"
-    public static boolean isAllEven(BinNode<Integer> current) {
-        if (current == null) return true;
-        if (current.getValue() % 2 != 0) return false;
-        return isAllEven(current.getLeft()) && isAllEven(current.getRight());
+    public static boolean isAllEven(BinNode<Integer> t) {
+        if (t == null) return true;
+        if (t.getValue() % 2 != 0) return false;
+        return isAllEven(t.getLeft()) && isAllEven(t.getRight());
     }
+
     // Задание 21
     // Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"
-    public static boolean hasNodeWithDigitsSumDiv5(BinNode<Integer> current) {
-        if (current == null) return false;
-        if (sumOfDigits(current.getValue()) % 5 == 0) return true;
-        return hasNodeWithDigitsSumDiv5(current.getLeft()) || hasNodeWithDigitsSumDiv5(current.getRight());
+    public static boolean hasSumDivFive(BinNode<Integer> t) {
+        if (t == null) return false;
+        if (sumOfDigits(t.getValue()) % 5 == 0) return true;
+        return hasSumDivFive(t.getLeft()) || hasSumDivFive(t.getRight());
     }
 
     /* Вспомогательная функция для подсчёта суммы цифр числа */
     public static int sumOfDigits(int n) {
-        n = Math.abs(n);
+        n = Math.abs(n); // возводим в модуль число
         int sum = 0;
         while (n > 0) {
             sum += n % 10;
@@ -382,11 +372,9 @@ public class Tree {
         }
         return sum;
     }
+
     // Задание 22
     /* Функция для "проверки, что все узлы дерева удовлетворяют трём условиям"
-     * @param current - корень дерева
-     * @return true, если все условия выполняются для всех узлов, иначе false
-     * Условия:
      * 1. Цифры значения узла идут по убыванию (от старшей к младшей).
      * 2. Количество листьев в правом поддереве <= значению узла.
      * 3. Сумма всех левых потомков (прямых детей) чётная.
