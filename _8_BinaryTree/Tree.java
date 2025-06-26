@@ -66,7 +66,9 @@ public class Tree {
     // и возвращает количество узлов в дереве."
     public static int countNodes(BinNode<Integer> t) {
         if (t == null) return 0;
-        return countNodes(t.getLeft()) + countNodes(t.getRight()) + 1;
+        return 1 +
+                + countNodes(t.getLeft())
+                + countNodes(t.getRight());
     }
 
     // Задание 2
@@ -84,7 +86,9 @@ public class Tree {
     // Подсчитывает количество правых потомков в бинарном дереве.
     public static int countRight(BinNode<Integer> t) {
         if (t == null) return 0;
-        return (t.hasRight() ? 1 : 0) + countRight(t.getLeft()) + countRight(t.getRight());
+        return (t.hasRight() ? 1 : 0)
+                + countRight(t.getLeft())
+                + countRight(t.getRight());
     }
 
     // Задание 4
@@ -102,9 +106,12 @@ public class Tree {
     public static int countFinalDots(BinNode<Integer> t) {
         if (t == null) return 0;
         if (!t.hasRight() && t.hasLeft())
-            return 1 + countFinalDots(t.getLeft()) + countFinalDots(t.getRight());
-        return (t.hasRight() && !t.hasLeft() ? 1 : 0) +
-                countFinalDots(t.getLeft()) + countFinalDots(t.getRight());
+            return 1
+                    + countFinalDots(t.getLeft())
+                    + countFinalDots(t.getRight());
+        return (t.hasRight() && !t.hasLeft() ? 1 : 0)
+                + countFinalDots(t.getLeft())
+                + countFinalDots(t.getRight());
     }
 
     // Задание 6
@@ -155,9 +162,9 @@ public class Tree {
         int currentNodeContribution = (t.getValue() % 2 == 0) ? 1 : 0;
         
         // Рекурсивно считаем четные узлы в левом и правом поддеревьях
-        return currentNodeContribution + 
-               countEvenNodes(t.getLeft()) + 
-               countEvenNodes(t.getRight());
+        return currentNodeContribution
+                + countEvenNodes(t.getLeft())
+                + countEvenNodes(t.getRight());
     }
 
     // Задание 9
@@ -167,9 +174,9 @@ public class Tree {
         // Проверяем, больше ли значение текущего узла чем X
         int currentNodeContribution = (t.getValue() > x) ? 1 : 0;
         // Рекурсивно считаем узлы со значениями больше X в левом и правом поддеревьях
-        return currentNodeContribution +
-                countNodesGreaterX(t.getLeft(), x) +
-                countNodesGreaterX(t.getRight(), x);
+        return currentNodeContribution
+                + countNodesGreaterX(t.getLeft(), x)
+                + countNodesGreaterX(t.getRight(), x);
     }
 
     // Задание 10
@@ -188,9 +195,10 @@ public class Tree {
         }
         // Рекурсивно считаем узлы со значением 5 в левом и правом поддеревьях
         return currentNodeContribution + 
-               countNodesFive(t.getLeft()) +
-               countNodesFive(t.getRight());
+               + countNodesFive(t.getLeft())
+               + countNodesFive(t.getRight());
     }
+
     // Задание 11
     // Напишите функцию, которая получает бинарное дерево, содержащее целые числа, и возвращает количество узлов,
     // значение которых меньше значения их родителя.
