@@ -393,6 +393,7 @@ public class Tree {
         int rightLeaves = countLeaves(current.getRight());
         if (rightLeaves > current.getValue()) return false;
 
+        // TODO: проверить
         // 3. Сумма всех левых потомков чётная
         int leftSum = 0;
         if (current.hasLeft()) leftSum += current.getLeft().getValue();
