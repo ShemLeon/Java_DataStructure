@@ -2,6 +2,7 @@ package _8_BinaryTree;
 import unit4.binTreeUtilsLib.*;
 import unit4.binTreeCanvasLib.*;
 import unit4.collectionsLib.BinNode;
+import unit4.collectionsLib.Queue;
 
 public class Tree {
     public static void main(String[] args) {
@@ -13,8 +14,10 @@ public class Tree {
         printPreOrder(t1);
         System.out.println("\nB) Print In-Order: ");
         printInOrder(t1);
-        System.out.println("\nB) Print Post-Order: ");
+        System.out.println("\nC) Print Post-Order: ");
         printPostOrder(t1);
+        System.out.println("\nD) Print Order: ");
+        printOrder(t1);
         System.out.println("\n1. Всего узлов в дереве: " + countNodes(t1));
         System.out.println("2. Листьев в дереве: " + countLeaves(t1));
         System.out.println("3. Правых потомков в бинарном дереве: " + countRight(t1));
@@ -37,6 +40,7 @@ public class Tree {
         System.out.println("20. Проверка, что все узлы четные:"  +  isAllEven(t1));
         System.out.println("21. Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"  +  hasSumDivFive(t1));
         System.out.println("22. Проверки, что все узлы дерева удовлетворяют трём условиям\":"  +  checkAllConditions(t1));
+        System.out.println(" -----------Order----------");
     }
 
     // Печать элементов дерева в Pre-Order
@@ -60,6 +64,21 @@ public class Tree {
         printPostOrder(t.getRight());
         System.out.print(" "+t.getValue());
     }
+
+    // Печать элементов дерева в Order
+    public static void printOrder(BinNode<Integer> t){
+        if (t==null) return;
+        Queue<BinNode<Integer>> q = new Queue<BinNode<Integer>>();
+        q.insert(t);
+        while (!q.isEmpty()) {
+            BinNode<Integer> t1= q.remove();
+            System.out.print(" "+t1.getValue());
+            if (t1.getLeft()!=null)
+                q.insert(t1.getLeft());
+            if (t1.getRight()!=null)
+                q.insert(t1.getRight());
+    }
+}
 
     // Задание 1
     // Ф-я получает бинарное дерево, содержащее целые числа,
@@ -419,6 +438,10 @@ public class Tree {
                 + sumSubtreeRecursive(t.getLeft())  // 2. ПРИБАВЛЯЕМ сумму левого поддерева
                 + sumSubtreeRecursive(t.getRight()); // 3. ПРИБАВЛЯЕМ сумму правого поддерева
     }
+
+    // Задание 2.1
+    // Order
+
 
 
 }
