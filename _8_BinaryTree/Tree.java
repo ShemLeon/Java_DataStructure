@@ -15,7 +15,7 @@ public class Tree {
         printInOrder(t1);
         System.out.println("\nB) Print Post-Order: ");
         printPostOrder(t1);
-        System.out.println("\n1. Узлов в дереве: " + countNodes(t1));
+        System.out.println("\n1. Всего узлов в дереве: " + countNodes(t1));
         System.out.println("2. Листьев в дереве: " + countLeaves(t1));
         System.out.println("3. Правых потомков в бинарном дереве: " + countRight(t1));
         System.out.println("4. «Единственных» левых потомков в бинарном дереве: " + countLeftFinal(t1));
@@ -383,37 +383,41 @@ public class Tree {
      * 2. Проверяем три условия для текущего узла.
      * 3. Рекурсивно проверяем левое и правое поддерево.
      */
-    public static boolean checkAllConditions(BinNode<Integer> current) {
-        if (current == null) return true;
+    public static boolean checkAllConditions(BinNode<Integer> t) {
+        if (t == null) return true;
 
-        // 1. Проверка, что цифры идут по убыванию
-        if (!isDigitsDecreasing(current.getValue())) return false;
+        // Проверка условия 1: Цифры значения узла идут по убыванию.
+        if (!isDigitsDecreasing(t.getValue())) return false;
 
-        // 2. Количество листьев в правом поддереве <= значению узла
-        int rightLeaves = countLeaves(current.getRight());
-        if (rightLeaves > current.getValue()) return false;
+        // Проверка условия 2: Количество листьев в правом поддереве <= значению узла
+        int rightLeaves = countLeaves(t.getRight());
+        if (rightLeaves > t.getValue()) return false;
 
-        // TODO: проверить
-        // 3. Сумма всех левых потомков чётная
-        int leftSum = 0;
-        if (current.hasLeft()) leftSum += current.getLeft().getValue();
-        if (current.hasRight()) leftSum += current.getRight().getValue();
-        if (leftSum % 2 != 0) return false;
+        // Проверка условия 3: Сумма всех потомков в левом поддереве каждого узла четная.
+        // Если левого поддерева нет, его сумма 0 - это четное число.
+        if (t.hasLeft()){
+            int leftSubtreeSum = sumSubtreeRecursive(t.getLeft());
+            if (leftSubtreeSum % 2 != 0) return false;
+        }
 
         // Рекурсивно проверяем поддеревья
-        return checkAllConditions(current.getLeft()) && checkAllConditions(current.getRight());
+        return checkAllConditions(t.getLeft()) && checkAllConditions(t.getRight());
     }
 
-    /* Вспомогательная функция: проверяет, что цифры числа идут по убыванию */
+    // Вспомогательная функция: проверяет, что цифры числа идут по убыванию */
     public static boolean isDigitsDecreasing(int n) {
-        int prev = 10;
-        while (n > 0) {
-            int digit = n % 10;
-            if (digit >= prev) return false;
-            prev = digit;
-            n /= 10;
-        }
-        return true;
+        if (n < 10) return true; // базовй случай для остановки рекурсии
+        // Проверка условия
+        if ((n%10) >= ((n/10) % 10)) return false;
+        return isDigitsDecreasing(n/10);
+    }
+
+    // Условие 3: Считает сумму значений всех узлов в подДереве.
+     public static int sumSubtreeRecursive(BinNode<Integer> t) {
+        if (t == null) return 0;
+        return t.getValue() // 1. Берем ЗНАЧЕНИЕ текущего узла
+                + sumSubtreeRecursive(t.getLeft())  // 2. ПРИБАВЛЯЕМ сумму левого поддерева
+                + sumSubtreeRecursive(t.getRight()); // 3. ПРИБАВЛЯЕМ сумму правого поддерева
     }
 
 
