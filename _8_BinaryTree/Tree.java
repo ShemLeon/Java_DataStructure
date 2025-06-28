@@ -39,9 +39,22 @@ public class Tree {
         System.out.println("19. Отзеркаливание дерева:"  +  mirrorTree(t1));
         System.out.println("20. Проверка, что все узлы четные:"  +  isAllEven(t1));
         System.out.println("21. Проверка, существует ли в дереве узел, сумма цифр которого делится на 5:"  +  hasSumDivFive(t1));
-        System.out.println("22. Проверки, что все узлы дерева удовлетворяют трём условиям\":"  +  checkAllConditions(t1));
+        System.out.println("22. Проверки, что все узлы дерева удовлетворяют трём условиям: \n"
+                + "* 1. Цифры значения узла идут по убыванию (от старшей к младшей) \n"
+                + "* 2. Количество листьев в правом поддереве <= значению узла. \n"
+                + "* 3. Сумма всех левых потомков (прямых детей) чётная.+  checkAllConditions(t1))");
+        System.out.println("23.3 Max значение узла:"  + findMaxSimple(t1));
+        System.out.println("23.4 Min значение узла:"  + findMinSimple(t1));
+
         System.out.println(" -----------Order----------");
+        System.out.println("23.1 Min значение узла:"  + findMinBST(t1));
+        System.out.println("23.4 Max значение узла:"  + findMaxBST(t1));
+        BinNode<Integer> t2 =createSearchFromSimple(t1);
+        BinTreeCanvas.addTree(t2);
+        System.out.println();
+
     }
+
 
     // Печать элементов дерева в Pre-Order
     public static void printPreOrder(BinNode<Integer> t) {
@@ -439,9 +452,130 @@ public class Tree {
                 + sumSubtreeRecursive(t.getRight()); // 3. ПРИБАВЛЯЕМ сумму правого поддерева
     }
 
-    // Задание 2.1
-    // Order
+    // Задание 23.1
+    // Поиск максимума в бинарном дереве поиска
+    // Сложность: O(h), где h — это высота дерева
+    public static BinNode<Integer> findMaxBST(BinNode<Integer> t) {
+        if (t == null) return null;
+        // Двигаемся вправо до самого конца
+        while (t.hasRight()) {
+            t = t.getRight();
+        }
+        return t; // Возвращаем самый правый узел
+    }
 
+    // Задание 23.2
+    // Поиск минимума в бинарном дереве поиска
+    // Сложность: O(h), где h — это высота дерева
+    // Лучший/Средний случай (сбалансированное дерево): В хорошо сбалансированном дереве высота h примерно равна log(n).
+    // Поэтому сложность будет O(log n). Это очень быстро.
+    public static BinNode<Integer> findMinBST(BinNode<Integer> t) {
+        if (t == null) return null;
+        // Двигаемся вправо до самого конца
+        while (t.hasLeft()) {
+            t = t.getLeft();
+        }
+        return t; // Возвращаем самый правый узел
+    }
 
+    // Задание 23.3:
+    //  Поиск минимума в обычном бинарном дереве
+    // Сложность: O(n), где n — это общее количество узлов в дереве.
+    public static int findMinSimple(BinNode<Integer> t) {
+        // Если дерево изначально пустое, в нем нет минимума.
+        if (t == null) {
+            throw new IllegalArgumentException("Нельзя найти минимум в пустом дереве.");
+        }
+        // Запускаем рекурсивный поиск с корневого узла.
+        return findMinHelper(t);
+    }
+
+    private static int findMinHelper(BinNode<Integer> t) {
+        // Начинаем с предположения, что минимум - это значение текущего узла.
+        int minimum = t.getValue();
+        // Если есть левый потомок, рекурсивно ищем минимум в левом поддереве
+        // и сравниваем с нашим текущим минимумом.
+        if (t.hasLeft()) {
+            minimum = Math.min(minimum, findMinHelper(t.getLeft()));
+        }
+        // То же самое делаем для правого потомка.
+        if (t.hasRight()) {
+            minimum = Math.min(minimum, findMinHelper(t.getRight()));
+        }
+        // Возвращаем найденное минимальное значение для этого поддерева.
+        return minimum;
+    }
+
+    // Задание 23.3:
+    //  Поиск максимума в обычном бинарном дереве
+    // Сложность: O(n), где n — это общее количество узлов в дереве.
+    public static int findMaxSimple(BinNode<Integer> t) {
+        // Если дерево изначально пустое, в нем нет минимума.
+        if (t == null) {
+            throw new IllegalArgumentException("Нельзя найти минимум в пустом дереве.");
+        }
+        // Запускаем рекурсивный поиск с корневого узла.
+        return findMaxHelper(t);
+    }
+
+    private static int findMaxHelper(BinNode<Integer> t) {
+        // Начинаем с предположения, что минимум - это значение текущего узла.
+        int maximum = t.getValue();
+        // Если есть левый потомок, рекурсивно ищем минимум в левом поддереве
+        // и сравниваем с нашим текущим минимумом.
+        if (t.hasLeft()) {
+            maximum = Math.max(maximum, findMaxHelper(t.getLeft()));
+        }
+        // То же самое делаем для правого потомка.
+        if (t.hasRight()) {
+            maximum = Math.max(maximum, findMaxHelper(t.getRight()));
+        }
+        // Возвращаем найденное максимальное значение для этого поддерева.
+        return maximum;
+    }
+
+    // Задание 24
+    // Преобразование обычного бинарного дерева в поиска
+    public static BinNode<Integer> createSearchFromSimple(BinNode<Integer> t) {
+        // Сложность: O(n^2), где n — это общее количество узлов в дереве.
+        // Создаем пустой корень для нашего будущего дерева поиска.
+        BinNode<Integer> bstRoot = null;
+        // Запускаем рекурсивный процесс обхода и вставки.
+        // Функция вернет нам полностью построенное дерево.
+        return traverseAndInsert(t, bstRoot);
+    }
+
+    private static BinNode<Integer> traverseAndInsert(BinNode<Integer> simpleNode, BinNode<Integer> bstRoot) {
+        // Базовый случай: если в исходном дереве дошли до пустого места,
+        // просто возвращаем то дерево, что уже успели построить.
+        if (simpleNode == null) {
+            return bstRoot;
+        }
+        // 1. Вставляем значение текущего узла из простого дерева в наше новое дерево поиска.
+        bstRoot = insertIntoBst(bstRoot, simpleNode.getValue());
+
+        // 2. Рекурсивно делаем то же самое для левого поддерева.
+        bstRoot = traverseAndInsert(simpleNode.getLeft(), bstRoot);
+
+        // 3. Рекурсивно делаем то же самое для правого поддерева.
+        bstRoot = traverseAndInsert(simpleNode.getRight(), bstRoot);
+
+        return bstRoot;
+    }
+
+    // Вспомогательная функция для вставки
+    private static BinNode<Integer> insertIntoBst(BinNode<Integer> bstNode, int value) {
+        if (bstNode == null) {
+            return new BinNode<>(value);
+        }
+
+        if (value < bstNode.getValue()) {
+            bstNode.setLeft(insertIntoBst(bstNode.getLeft(), value));
+        } else if (value > bstNode.getValue()) {
+            bstNode.setRight(insertIntoBst(bstNode.getRight(), value));
+        }
+
+        return bstNode;
+    }
 
 }
