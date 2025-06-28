@@ -464,7 +464,7 @@ public class Tree {
         return t; // Возвращаем самый правый узел
     }
 
-    // Задание 23.2
+    // Задание 23.3
     // Поиск минимума в бинарном дереве поиска
     // Сложность: O(h), где h — это высота дерева
     // Лучший/Средний случай (сбалансированное дерево): В хорошо сбалансированном дереве высота h примерно равна log(n).
@@ -478,7 +478,7 @@ public class Tree {
         return t; // Возвращаем самый правый узел
     }
 
-    // Задание 23.3:
+    // Задание 23.4:
     //  Поиск минимума в обычном бинарном дереве
     // Сложность: O(n), где n — это общее количество узлов в дереве.
     public static int findMinSimple(BinNode<Integer> t) {
@@ -506,7 +506,7 @@ public class Tree {
         return minimum;
     }
 
-    // Задание 23.3:
+    // Задание 23.2:
     //  Поиск максимума в обычном бинарном дереве
     // Сложность: O(n), где n — это общее количество узлов в дереве.
     public static int findMaxSimple(BinNode<Integer> t) {
@@ -546,11 +546,8 @@ public class Tree {
     }
 
     private static BinNode<Integer> traverseAndInsert(BinNode<Integer> simpleNode, BinNode<Integer> bstRoot) {
-        // Базовый случай: если в исходном дереве дошли до пустого места,
-        // просто возвращаем то дерево, что уже успели построить.
-        if (simpleNode == null) {
-            return bstRoot;
-        }
+        // в исходном дереве дошли до пустого места, просто возвращаем то дерево, что уже успели построить.
+        if (simpleNode == null) return bstRoot;
         // 1. Вставляем значение текущего узла из простого дерева в наше новое дерево поиска.
         bstRoot = insertIntoBst(bstRoot, simpleNode.getValue());
 
@@ -577,5 +574,83 @@ public class Tree {
 
         return bstNode;
     }
+
+    // Задание 25.1
+    // Поиск (Predecessor) предшественника узла `x` в бинарном дереве поиска с корнем `root`
+    public static BinNode<Integer> findPredecessor(BinNode<Integer> root, BinNode<Integer> x) {
+        // Сложность: O(n^2), где n — это общее количество узлов в дереве.
+        // Создаем пустой корень для нашего будущего дерева поиска.
+        if (x == null) {return null;}
+
+        // Случай 1: У узла `x` есть левое поддерево.
+        // Предшественник - это максимальный узел в его левом поддереве.
+        // Используем вспомогательную функцию findMaxBST.
+        if (x.hasLeft()) {
+            return findMaxBST(x.getLeft());
+        }
+
+        // Случай 2: У узла `x` нет левого поддерева.
+        // Ищем предшественника, спускаясь от корня. Предшественник - это самый нижний
+        // предок `x`, чей правый дочерний узел также является предком `x`.
+        BinNode<Integer> predecessor = null;
+        BinNode<Integer> current = root;
+        while (current != null) {
+            if (x.getValue() > current.getValue()) {
+                // Если `x` больше текущего узла, то `current` может быть предшественником.
+                // Запоминаем его и идем вправо, чтобы найти более близкого (большего) предшественника.
+                predecessor = current;
+                current = current.getRight();
+            } else if (x.getValue() < current.getValue()) {
+                // Если `x` меньше, то `current` не может быть предшественником. Идем влево.
+                current = current.getLeft();
+            } else {
+                // Мы нашли узел `x`. Цикл можно остановить.
+                break;
+            }
+        }
+        return predecessor;
+    }
+
+
+    // Задание 25.2
+    // Поиск (Successor) преемника узла `x` в бинарном дереве поиска с корнем `root`
+    public static BinNode<Integer> findSuccessor(BinNode<Integer> root, BinNode<Integer> x) {
+        // Сложность: O(h), где h - высота дерева. В худшем случае O(n).
+        if (x == null) {
+            return null;
+        }
+
+        // Случай 1: У узла `x` есть правое поддерево.
+        // Преемник - это минимальный узел в его правом поддереве.
+        // Используем вспомогательную функцию findMinBST.
+        if (x.hasRight()) {
+            return findMinBST(x.getRight());
+        }
+
+        // Случай 2: У узла `x` нет правого поддерева.
+        // Ищем преемника, спускаясь от корня. Преемник - это самый нижний
+        // предок `x`, чей левый дочерний узел также является предком `x`.
+        BinNode<Integer> successor = null;
+        BinNode<Integer> current = root;
+        while (current != null) {
+            if (x.getValue() < current.getValue()) {
+                // Если `x` меньше текущего узла, то `current` может быть преемником.
+                // Запоминаем его и идем влево, чтобы найти более близкого (меньшего) преемника.
+                successor = current;
+                current = current.getLeft();
+            } else if (x.getValue() > current.getValue()) {
+                // Если `x` больше, то `current` не может быть преемником. Идем вправо.
+                current = current.getRight();
+            } else {
+                // Мы нашли узел `x`. Цикл можно остановить.
+                break;
+            }
+        }
+        return successor;
+    }
+
+
+
+
 
 }
