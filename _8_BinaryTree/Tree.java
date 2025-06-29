@@ -19,6 +19,7 @@ public class Tree {
         System.out.println("\nD) Print Order: ");
         printOrder(t1);
         System.out.println("\n1. Всего узлов в дереве: " + countNodes(t1));
+        System.out.println("1.1 Наличие узла со значением X в дереве: " + searchNodeBST(t1, 5));
         System.out.println("2. Листьев в дереве: " + countLeaves(t1));
         System.out.println("3. Правых потомков в бинарном дереве: " + countRight(t1));
         System.out.println("4. «Единственных» левых потомков в бинарном дереве: " + countLeftFinal(t1));
@@ -94,13 +95,56 @@ public class Tree {
 }
 
     // Задание 1
-    // Ф-я получает бинарное дерево, содержащее целые числа,
+    // Ф-я получает бинарное дерево содержащее целые числа,
     // и возвращает количество узлов в дереве."
     public static int countNodes(BinNode<Integer> t) {
         if (t == null) return 0;
         return 1 +
                 + countNodes(t.getLeft())
                 + countNodes(t.getRight());
+    }
+
+    // Задание 1.1
+    // Наличие узла со значением X в дереве:
+    // Ф-я получает бинарное дерево  поиска BST, содержащее целые числа,
+    // и возвращает true/false наличия узла со значением в дереве."
+    public static boolean searchNodeBST(BinNode<Integer> t, int x) {
+        if (t == null) return false;
+        if (t.getValue()==x) return true;
+        else {
+            if (t.getValue()>x) return searchNodeBST(t.getLeft(), x);
+            else return searchNodeBST(t.getRight(), x);
+        }
+    }
+
+    // Задание 1.2
+    // Наличие узла со значением X в обычном дереве:
+    // Ф-я получает бинарное дерево, содержащее целые числа,
+    // и возвращает true/false наличия узла со значением в дереве."
+    public static boolean searchNode(BinNode<Integer> t, int x) {
+        if (t == null) return false;
+        if (t.getValue() == x) return true;
+        return searchNode(t.getLeft(), x) || searchNode(t.getRight(), x);
+    }
+
+    // Задание 1.3
+    // Ищет узел со значением X и ВОЗВРАЩАЕТ его.
+    // Если узел не найден, возвращает null.
+    public static BinNode<Integer> searchAndReturnNode(BinNode<Integer> t, int x) {
+        if (t == null) return null;
+        if (t.getValue() == x) return t;
+        // Рекурсивный шаг:
+        // Сначала ищем в левом поддереве.
+        BinNode<Integer> foundNode = searchAndReturnNode(t.getLeft(), x);
+
+        // Если нашли в левом поддереве (результат не null), то сразу возвращаем найденное.
+        if (foundNode != null) {
+            return foundNode;
+        }
+
+        // Если в левом не нашли, то ищем в правом и возвращаем результат оттуда
+        // (это будет либо найденный узел, либо null, если и там его нет).
+        return searchAndReturnNode(t.getRight(), x);
     }
 
     // Задание 2
