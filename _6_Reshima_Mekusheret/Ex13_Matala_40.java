@@ -3,10 +3,10 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
 /**
- * The class contains functions for finding a sequence of n consecutive numbers
- * in an integer linked list. The sequence can be either increasing or decreasing.
+ *  поиск последовательности n последовательных чисел  в связном списке целых чисел.
+ *  Последовательность может быть возрастающей или убывающей.
  */
-public class Matala_40 {
+public class Ex13_Matala_40 {
 
     public static void main(String[] args) {
         int testArr[] = {1, 2, 3, 4, 77, 5, 6, 7, 0, 9, 10};
@@ -20,20 +20,20 @@ public class Matala_40 {
     }
 
     /**
-     * Function to find a sequence of n consecutive numbers in an integer linked list
-     * @param head head node of the list
-     * @param n length of the sequence to find
-     * @return true if a sequence of length n is found
-     * Complexity: O(n²), where n is the number of elements in the list
-     * Working principle:
-     * 1. Check boundary cases (empty list, n <= 0, n = 1)
-     * 2. Iterate through the list:
-     *    - For each node, check for an increasing sequence
-     *    - For each node, check for a decreasing sequence
-     * 3. Return true if at least one sequence is found
+     * Функция для поиска последовательности из n последовательных чисел в связном списке целых чисел.
+     * @param head головной узел списка
+     * @param n длина искомой последовательности
+     * @return true, если найдена последовательность длины n
+     * Сложность: O(n²), где n - количество элементов в списке.
+     * Принцип работы:
+     * 1. Проверка граничных случаев (пустой список, n <= 0, n = 1)
+     * 2. Итерация по списку:
+     *    - Для каждого узла проверяется возрастающая последовательность
+     *    - Для каждого узла проверяется убывающая последовательность
+     * 3. Возвращается true, если найдена хотя бы одна последовательность
      */
     public static boolean checkListSequence(Node<Integer> head, int n) {
-        if (head == null || n <= 0) return false; // check for empty list and negative n
+        if (head == null || n <= 0) return false; // проверка на пустой список и отрицательное n
         if (n == 1) return true; // check for sequence of one number
 
         Node<Integer> current = head;

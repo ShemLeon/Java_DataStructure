@@ -51,16 +51,7 @@ public class baza {
         System.out.println(c.getNext());  // 500
         System.out.println(c.toString());
 
-
-
-
-
-
-
-
         Node<Integer> list = createList(new int[]{90, 5, 15, 5, 5, 25}); // Example list
-
-
         printList(list);
     }
 

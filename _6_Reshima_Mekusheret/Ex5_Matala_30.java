@@ -1,16 +1,10 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
-// Submitters:
-// Evgeny Namtchenko 321404634
-// Shmyakin Leonid 336540331
-// Class 48-5
 
 /**
- * Class contains functions for working with a linked list of integers,
- * including checking if elements are sorted in ascending order.
+ проверка сортировка по возрастанию
  */
-public class Matala_30 {
+public class Ex5_Matala_30 {
     public static void main(String[] args) {
         Node<Integer> list1 = createList(new int[]{1, 2, 3, 4, 5}); // Sorted list
         Node<Integer> list2 = createList(new int[]{1, 3, 0, 4, 5}); // Unsorted list

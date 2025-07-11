@@ -2,12 +2,11 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
 
-public class Matala_28 {
+public class Ex3_Matala_28 {
     public static void main(String[] args) {
-        Node<Integer> list = createList(new int[]{5, 5, 15, 5, 5, 25}); // Example list
-        System.out.println("Sum of list elements: " + sumOfList(list));
-        printList(list);
-        System.out.println(list.toString());
+        Node<Integer> rm = createList(new int[]{5, 5, 15, 5, 5, 25}); // Example list
+        System.out.println("Sum of list elements: " + sumOfList(rm)); // 60
+        printList(rm);
     }
 
     /* Function to calculate the sum of all elements in a linked list

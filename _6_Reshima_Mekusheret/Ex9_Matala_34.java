@@ -1,17 +1,11 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
-
-// Submitters:
-// Evgeny Namtchenko 321404634
-// Shmiakin Leonid 336540331
-// Class 48-5
 
 /**
  * The class contains functions for working with a linked list of strings,
  * including creating a deep copy of the list.
  */
-public class Matala_34 {
+public class Ex9_Matala_34 {
    public static void main(String[] args) {
         // Test examples for copyList
         Node<String> list = new Node<>("Hello");
@@ -70,9 +64,7 @@ public class Matala_34 {
      * Note: This is a deep copy - changes to the original list do not affect the copied list
      */
     public static Node<String> copyList(Node<String> list) {
-        if (list == null) {
-            return null;
-        }
+        if (list == null) return null;
         
         Node<String> newList = new Node<String>(list.getValue());
         Node<String> current = newList;

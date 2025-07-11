@@ -1,12 +1,10 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
+//  Класс содержит функции для удаления последовательных повторяющихся символов
+//  из связного списка символов
 
-/**
- * Класс содержит функции для удаления последовательных повторяющихся символов 
- * из связного списка символов
- */
-public class Matala_39 {
+public class Ex12_Matala_39 {
     public static void main(String[] args) {
         // Тестовые случаи
         String[] tests = {
@@ -40,9 +38,7 @@ public class Matala_39 {
     public static Node<Character> removeConsecutiveDuplicates(Node<Character> head) {
         // Если список пустой или содержит один узел
         if (head == null || head.getNext() == null) return head;
-
         Node<Character> current = head; // создаем указатель
-        
         // Проходим по списку
         while (current != null && current.getNext() != null) {
             // Если текущий символ равен следующему
@@ -50,11 +46,10 @@ public class Matala_39 {
                 // Пропускаем следующий узел
                 current.setNext(current.getNext().getNext());
             } else {
-                // Переходим к следующему узлу только если не найден дубликат
+                // Делаем установку к следующему узлу - только если не найден дубликат
                 current = current.getNext();
             }
         }
-        
         return head;
     }
     

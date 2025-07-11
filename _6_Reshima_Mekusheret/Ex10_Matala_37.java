@@ -1,45 +1,26 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
 
-// Authors:
-// Evgeny Nemchenko 321404634
-// Leonid Shmiakin 336540331
-// Class 48-5
 
 /**
  * Class contains functions for working with a sorted linked list of integers,
  * including inserting a new number while maintaining the sorted order.
  */
-public class Matala_37 {
-    /**
-     * Function to insert a number into a sorted linked list while maintaining order
-     * @param head head node of the sorted list
-     * @param number number to insert
-     * @return head node of the list (may change if the new number is less than the first element)
-     * Complexity: O(n), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Create a new node with the given number
-     * 2. Check for special cases:
-     *    - If the list is empty or the new number is less than the first element,
-     *      insert at the beginning of the list
-     * 3. Find the correct position for the new node:
-     *    - Traverse the list until we find an element greater than or equal to the new number
-     * 4. Insert the new node between the current and next elements
-     * 5. Return the head of the list
-     */
+public class Ex10_Matala_37 {
+
     public static Node<Integer> insertSorted(Node<Integer> head, int number) {
         Node<Integer> newNode = new Node<>(number);
-        
-        // If the list is empty or the new number is less than the first element
+        // Если список пуст или новое число меньше первого элемента
         if (head == null || head.getValue() >= number) {
             newNode.setNext(head);
             return newNode;
         }
         
-        // Find the correct position for the new node
+        // Поиск правильной позиции для новой ноды
         Node<Integer> current = head;
-        while (current.getNext() != null && current.getNext().getValue() < number) {
+
+        while (current.getNext() != null) {
+            if (current.getNext().getValue() >= number)  break;
             current = current.getNext();
         }
         
@@ -49,16 +30,10 @@ public class Matala_37 {
         
         return head;
     }
-    
-    /**
-     * Function to print the elements of a linked list
-     * @param head head node of the list
-     * Complexity: O(n), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Traverse the list from the beginning to the end
-     * 2. Print the value of each node
-     * 3. Add an arrow between elements for clarity
-     */
+
+
+
+
     public static void printList(Node<Integer> head) {
         Node<Integer> current = head;
         while (current != null) {

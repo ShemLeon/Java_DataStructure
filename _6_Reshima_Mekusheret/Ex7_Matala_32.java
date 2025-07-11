@@ -1,7 +1,6 @@
 package _6_Reshima_Mekusheret;
 
 import unit4.collectionsLib.Node;
-import java.util.HashSet;
 
 // Submitters:
 // Evgeny Namchenko 321404634
@@ -12,7 +11,7 @@ import java.util.HashSet;
  * The class contains functions for working with a linked list of floating point numbers,
  * including checking for the presence of a given number in the list.
  */
-public class Matala_32 {
+public class Ex7_Matala_32 {
     public static void main(String[] args) {
         Node<Double> list = createList(new double[]{1.2, 3.5, 4.0, 6.7}); // Example list
         double number = 4.0; // Target number
@@ -22,18 +21,6 @@ public class Matala_32 {
         System.out.println("Number " + number + " found in list: " + containsNumber(list, number));
     }
 
-    /**
-     * Function to check if a linked list contains a target number
-     * @param head head node of the linked list
-     * @param target target number
-     * @return true if target number is found, false otherwise
-     * Complexity: O(n), where n is the number of nodes in the list. Each node is traversed once
-     * Working principle:
-     * 1. Traverse the list from start to end
-     * 2. For each node, compare its value with the target number
-     * 3. If a match is found, return true
-     * 4. If the end of the list is reached without finding the number, return false
-     */
     public static boolean containsNumber(Node<Double> head, double target) {
         Node<Double> current = head;
 

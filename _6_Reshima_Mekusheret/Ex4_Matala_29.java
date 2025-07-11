@@ -4,7 +4,7 @@ import unit4.collectionsLib.Node;
 /* Class contains functions for working with a linked list of real numbers,
  * including checking for equality of the number of elements above and below the average value
  */
-public class Matala_29 {
+public class Ex4_Matala_29 {
     public static void main(String[] args) {
         Node<Double> list = createList(new double[]{1.5, 2.0, 3.5, 6.0, 7.5, 9.0}); // Example list
         System.out.println("Result of equality check: " + isEqualAboveBelowAverage(list));

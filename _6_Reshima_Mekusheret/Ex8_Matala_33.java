@@ -1,16 +1,14 @@
 package _6_Reshima_Mekusheret;
 
 import unit4.collectionsLib.Node;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The class contains functions for working with a linked list of floating point numbers,
  * including removing duplicates from the list.
  */
-public class Matala_33 {
+public class Ex8_Matala_33 {
     public static void main(String[] args) {
-        Node<Double> list = createList(new double[]{1.2, 3.5, 4.0, 3.5, 6.7, 1.2, 4.0}); // Example list with duplicates
+        Node<Double> list = createList(new double[]{1.2, 3.5, 4.5, 3.5, 6.7, 1.2, 4.0, 4.0}); // Example list with duplicates
         System.out.println("Original list:");
         printList(list);
 
@@ -24,21 +22,10 @@ public class Matala_33 {
      * @param head head node of the linked list
      * @return head node of the list without duplicates
      * Complexity: O(n^2), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Check the base case (empty list)
-     * 2. For each element in the list:
-     *    - Traverse all subsequent elements
-     *    - If a duplicate is found, remove it by changing the links
-     *    - If the element is unique, continue searching
-     * 3. Return the list without duplicates
      */
     public static Node<Double> removeDuplicates(Node<Double> head) {
-        if (head == null) {
-            return null; // Empty list
-        }
-
+        if (head == null) return null; // Empty list
         Node<Double> current = head;
-
         while (current != null) {
             Node<Double> runner = current; // For checking all subsequent elements
             while (runner.getNext() != null) {
