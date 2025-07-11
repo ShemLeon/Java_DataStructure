@@ -730,6 +730,124 @@ public class Tree {
         return t; // Возвращаем (возможно, измененный) корень поддерева
     }
 
+// Задание 28
+// Возвращает количество узлов на заданном уровне (0 - корень)
+public static int countNodesAtLevel(BinNode<Integer> t, int level) {
+    if (t == null) return 0;
+    if (level == 0) return 1;
+    return countNodesAtLevel(t.getLeft(), level - 1) + 
+           countNodesAtLevel(t.getRight(), level - 1);
+}
+
+// Задание 29
+// Проверяет, является ли дерево симметричным (зеркальным относительно центра)
+public static boolean isSymmetric(BinNode<Integer> t) {
+    if (t == null) return true;
+    return isMirror(t.getLeft(), t.getRight());
+}
+
+private static boolean isMirror(BinNode<Integer> left, BinNode<Integer> right) {
+    if (left == null && right == null) return true;
+    if (left == null || right == null) return false;
+    return (left.getValue().equals(right.getValue())) &&
+           isMirror(left.getLeft(), right.getRight()) &&
+           isMirror(left.getRight(), right.getLeft());
+}
+
+// Задание 30
+// Находит путь от корня к узлу с заданным значением
+public static String findPath(BinNode<Integer> t, int target) {
+    if (t == null) return "";
+    if (t.getValue() == target) return "Found";
+    
+    String leftPath = findPath(t.getLeft(), target);
+    if (!leftPath.isEmpty()) {
+        return leftPath.equals("Found") ? "L" : "L" + leftPath;
+    }
+    
+    String rightPath = findPath(t.getRight(), target);
+    if (!rightPath.isEmpty()) {
+        return rightPath.equals("Found") ? "R" : "R" + rightPath;
+    }
+    
+    return "";
+}
+// Ex31: Возвращает диаметр дерева (самый длинный путь между любыми двумя узлами)
+public static int getDiameter(BinNode<Integer> t) {
+    if (t == null) return 0;
+    
+    int leftHeight = getTreeHeight(t.getLeft());
+    int rightHeight = getTreeHeight(t.getRight());
+    int currentDiameter = leftHeight + rightHeight;
+    
+    int leftDiameter = getDiameter(t.getLeft());
+    int rightDiameter = getDiameter(t.getRight());
+    
+    return Math.max(currentDiameter, Math.max(leftDiameter, rightDiameter));
+}
+
+
+// Ex32:  Возвращает максимальную ширину дерева (максимальное количество узлов на одном уровне)
+public static int getMaxWidth(BinNode<Integer> t) {
+    if (t == null) return 0;
+    
+    Queue<BinNode<Integer>> queue = new Queue<>();
+    queue.insert(t);
+    int maxWidth = 0;
+    
+    while (!queue.isEmpty()) {
+        int levelSize = getQueueSize(queue);
+        maxWidth = Math.max(maxWidth, levelSize);
+        
+        // Обрабатываем все узлы текущего уровня
+        for (int i = 0; i < levelSize; i++) {
+            BinNode<Integer> current = queue.remove();
+            if (current.hasLeft()) queue.insert(current.getLeft());
+            if (current.hasRight()) queue.insert(current.getRight());
+        }
+    }
+    return maxWidth;
+}
+
+
+private static int getQueueSize(Queue<BinNode<Integer>> queue) {
+    int size = 0;
+    Queue<BinNode<Integer>> temp = new Queue<>();
+    
+    while (!queue.isEmpty()) {
+        temp.insert(queue.remove());
+        size++;
+    }
+    
+    while (!temp.isEmpty()) {
+        queue.insert(temp.remove());
+    }
+    
+    return size;
+}
+
+// Ex33: Проверяет, является ли дерево совершенным (все листья на одном уровне)
+public static boolean isPerfect(BinNode<Integer> t) {
+    if (t == null) return true;
+    int depth = getDepthToFirstLeaf(t);
+    return checkPerfect(t, depth, 0);
+}
+
+private static int getDepthToFirstLeaf(BinNode<Integer> t) {
+    if (t == null) return 0;
+    if (!t.hasLeft() && !t.hasRight()) return 0;
+    if (!t.hasLeft()) return 1 + getDepthToFirstLeaf(t.getRight());
+    return 1 + getDepthToFirstLeaf(t.getLeft());
+}
+
+private static boolean checkPerfect(BinNode<Integer> t, int targetDepth, int currentDepth) {
+    if (t == null) return true;
+    if (!t.hasLeft() && !t.hasRight()) return currentDepth == targetDepth;
+    if (!t.hasLeft() || !t.hasRight()) return false;
+    
+    return checkPerfect(t.getLeft(), targetDepth, currentDepth + 1) &&
+           checkPerfect(t.getRight(), targetDepth, currentDepth + 1);
+}
 
 
 
