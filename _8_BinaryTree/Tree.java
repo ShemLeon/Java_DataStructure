@@ -53,7 +53,7 @@ public class Tree {
         BinNode<Integer> t2 =createSearchFromSimple(t1);
         BinTreeCanvas.addTree(t2);
         System.out.println();
-
+        System.out.println("34. Значения всех узлов - простые числа. У листьев - четные:"  + isPrimeTree(t1));
     }
 
 
@@ -809,7 +809,6 @@ public static int getMaxWidth(BinNode<Integer> t) {
     return maxWidth;
 }
 
-
 private static int getQueueSize(Queue<BinNode<Integer>> queue) {
     int size = 0;
     Queue<BinNode<Integer>> temp = new Queue<>();
@@ -849,8 +848,36 @@ private static boolean checkPerfect(BinNode<Integer> t, int targetDepth, int cur
            checkPerfect(t.getRight(), targetDepth, currentDepth + 1);
 }
 
+// Ex34: Проверка "Прайм-дерево" - Значение каждого внутреннего узла (не листа) является простым числом.
+// Значение каждого листа является четным числом.
+// Complexity: O(N * sqrt(V_max)).
+private static boolean isPrimeTree(BinNode<Integer> t) {
+    if (t == null) return true; // Базовый случай: пустое поддерево считается корректным
+    // Случай 1: Узел является листом
+    if (isLeaf(t)) return isEven(t.getValue());
+    // Случай 2: Узел является внутренним (не листом)
+    return isPrime(t.getValue())
+            && isPrimeTree(t.getLeft())
+            && isPrimeTree(t.getRight());
+}
 
+    public static boolean  isPrime(int n){
+        // Complexity: O(sqrt(n))
+        if (n <= 1) return false;
+        for (int i = 2; i < Math.sqrt(n); i++){
+            if (n%i==0) return false;
+        }
+        return true;
+    }
 
+    public static boolean isEven(int n){
+        return n%2==0;
+    }
+    public static boolean isLeaf(BinNode<Integer> t) {
+    // проверка что узел - это лист
+        if (t == null) return false;
+        return !t.hasLeft() && !t.hasRight();
+    }
 
 
 }
