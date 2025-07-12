@@ -32,7 +32,7 @@ import unit4.collectionsLib.Stack;
 - abb (стек пустой)
 */
 
-public class Mahsanit_d3 {
+public class Ex5_InputGood {
     public static void main(String[] args) {
         // Тестируем разные строки
         testString("");      // должно быть GOOD
@@ -44,6 +44,7 @@ public class Mahsanit_d3 {
         testString("aba");   // должно быть NOT GOOD
         testString("aab");   // должно быть NOT GOOD
         testString("abb");   // должно быть NOT GOOD
+        testString("sss");   // должно быть NOT GOOD
     }
 
     public static void testString(String input) {

@@ -4,9 +4,7 @@ import unit4.collectionsLib.Stack;
 
 public class baza_mahsanit {
     /*
-
     основные методы и приемы для "MAHSANIT" / "LIFO" / "STACK"
-
     --  stack.push()    - положить в голову махсанита значение? объект?
     --  stack.pop()     - удалить и "дать пользователю"/вернуть значение с вершины стека
     --  stack.top()     - посмотреть значение на вершине стека (без удаления)
@@ -15,16 +13,48 @@ public class baza_mahsanit {
         System.out.println(stack.toString());
     Пример создания стека:
     Stack<Integer> st = new Stack<Integer>();
-    Stack<String> st = new Stack<String>();
     Stack<Integer> st = new <Integer>Stack();
-        st.push(10);
-
-
-
+    Stack<String> st = new Stack<String>();
     */
+
+
+    // Метод для печати стека
+    public static void printStack(Stack<Character> stack) {
+        Stack<Character> tempStack = new Stack<>();
+        // Перекладываем и печатаем элементы
+        while (!stack.isEmpty()) {
+            Character element = stack.pop();
+            System.out.println(element);
+            tempStack.push(element);
+        }
+        // Возвращаем элементы обратно
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+
+    public static void printStackInt(Stack<Integer> stack) {
+        // Создаем временный стек для хранения элементов
+        Stack<Integer> tempStack = new Stack<Integer>();
+        System.out.println("Содержимое стека (сверху вниз):");
+        // Перекладываем и печатаем элементы
+        while (!stack.isEmpty()) {
+            int element = stack.pop();
+            System.out.println(element);
+            tempStack.push(element);
+        }
+        // Возвращаем элементы обратно
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }}
+
+
     public static void main(String[] args) {
         // Пример 1: Работа с числами
         Stack<Integer> numbers = new Stack<Integer>();
+        Stack<Integer> st = new <Integer>Stack();
+        st.push(5);
+        System.out.println(st.toString());
         numbers.push(10);
         numbers.push(20);
         numbers.push(30);
@@ -74,41 +104,7 @@ public class baza_mahsanit {
             words.push(tempCount.pop());
         }
         System.out.println("Количество элементов: " + count);
-
-        // Пример 6: Поиск максимального элемента
-        Stack<Integer> numbers2 = new Stack<Integer>();
-        numbers2.push(5);
-        numbers2.push(8);
-        numbers2.push(3);
-        numbers2.push(12);
-        numbers2.push(9);
-
-        int max = findMax(numbers2);
-        System.out.println("Максимальный элемент: " + max);
     }
 
-    // Метод для поиска максимального элемента в стеке
-    public static int findMax(Stack<Integer> stack) {
-        if (stack.isEmpty()) {
-            return Integer.MIN_VALUE;
-        }
 
-        Stack<Integer> tempStack = new Stack<Integer>();
-        int max = stack.top();
-
-        while (!stack.isEmpty()) {
-            int current = stack.pop();
-            if (current > max) {
-                max = current;
-            }
-            tempStack.push(current);
-        }
-
-        // Восстанавливаем исходный стек
-        while (!tempStack.isEmpty()) {
-            stack.push(tempStack.pop());
-        }
-
-        return max;
-    }
 }
