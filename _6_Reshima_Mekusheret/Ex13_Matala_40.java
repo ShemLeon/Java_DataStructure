@@ -1,14 +1,11 @@
 package _6_Reshima_Mekusheret;
 
 import unit4.collectionsLib.Node;
-
 import static _6_Reshima_Mekusheret.baza.createList;
 import static _6_Reshima_Mekusheret.baza.printList;
 
-/**
- *  поиск последовательности n последовательных чисел  в связном списке целых чисел.
- *  Последовательность может быть возрастающей или убывающей.
- */
+// Проверка на наличие последовательности n последовательных чисел  в связном списке целых чисел.
+// Последовательность может быть возрастающей или убывающей.
 public class Ex13_Matala_40 {
 
     public static void main(String[] args) {

@@ -4,6 +4,9 @@ import unit4.collectionsLib.Node;
 import java.util.HashSet;
 import java.util.Set;
 
+import static _6_Reshima_Mekusheret.baza.createList;
+import static _6_Reshima_Mekusheret.baza.printList;
+
 /**
  * The class contains functions for working with a linked list of integers,
  * including counting the number of sequences of a given number.
@@ -36,54 +39,7 @@ public class Ex6_Matala_31 {
         return count;
     }
 
-    /**
-     * Function to create a linked list from an array of integers
-     * @param values array of integers to convert to a linked list
-     * @return head node of the created linked list
-     * Complexity: O(n), where n is the size of the input array
-     * Working principle:
-     * 1. Initialize an empty list
-     * 2. Traverse the array of values
-     * 3. For each value, create a new node and add it to the end of the list
-     */
-    public static Node<Integer> createList(int[] values) {
-        Node<Integer> head = null;
-        Node<Integer> current = null;
 
-        for (int value : values) {
-            if (head == null) {
-                head = new Node<>(value);
-                current = head;
-            } else {
-                current.setNext(new Node<>(value));
-                current = current.getNext();
-            }
-        }
-
-        return head;
-    }
-
-    /**
-     * Function to print the elements of a linked list
-     * @param head head node of the linked list
-     * Complexity: O(n), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Traverse the list from start to end
-     * 2. Print the value of each node
-     * 3. Add an arrow between elements for clarity
-     */
-    public static void printList(Node<Integer> head) {
-        Node<Integer> current = head;
-
-        while (current != null) {
-            System.out.print(current.getValue());
-            if (current.getNext() != null) {
-                System.out.print(" -> ");
-            }
-            current = current.getNext();
-        }
-        System.out.println();
-    }
 
     /* Function to check if a linked list contains duplicates
      * @param head head node of the linked list

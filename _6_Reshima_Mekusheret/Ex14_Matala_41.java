@@ -1,18 +1,14 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
-
-// comments:
-// evgeny namchenko 321404634
-// shmakin leonid 336540331
-// kita 48-5
+import static _6_Reshima_Mekusheret.baza.printList;
 
 /**
- * Class contains functions for reorganizing a linked list so that all elements
- * greater than 100 are at the beginning of the list, and all numbers less than or
- * equal to 100 are at the end of the list.
+ * Класс содержит функции для реорганизации связного списка так, чтобы все элементы
+ * больше 100 находились в начале списка, а все числа меньше или
+ * равные 100 находились в конце списка.
  */
-public class Matala_41 {
+
+public class Ex14_Matala_41 {
 
     public static void main(String[] args) {
         // Test cases
@@ -100,28 +96,5 @@ public class Matala_41 {
         }
 
         return head;
-    }
-
-    /**
-     * Auxiliary function for "printing a list"
-     * @param head starting node of the list
-     * Complexity: O(n), where n is the number of elements in the list
-     * Working principle:
-     * 1. Check for an empty list
-     * 2. Go through the list from start to finish
-     * 3. Print each element
-     */
-    public static void printList(Node<Integer> head) {
-        if (head == null) {
-            System.out.println("Empty list");
-            return;
-        }
-
-        Node<Integer> current = head;
-        while (current != null) {
-            System.out.print(current.getValue() + " ");
-            current = current.getNext();
-        }
-        System.out.println();
     }
 }

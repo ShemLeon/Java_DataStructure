@@ -10,7 +10,7 @@ public class baza {
     -- current.getNext()  -     get the value of the next node
     -- current.setNext(new Node<>(value)) - set the value of the next node
     -- current = current.getNext();   -- Move to the next node
-
+    -- current.hasNext() -- boolean
     1 - create a list from array:   public static Node<Integer> createList(int[] values) { return head }
     2 - print the list:      public static void printList(Node<Integer> head){}
 
