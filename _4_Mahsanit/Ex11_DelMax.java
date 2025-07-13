@@ -2,21 +2,10 @@ package _4_Mahsanit;
 
 import unit4.collectionsLib.Stack;
 
-public class Mahsanit_t20 {
+public class Ex11_DelMax {
 
     public static double whatIsTheLargestDouble(Stack<Double> st) {
-        /*
-         * Function to find the largest real number in the stack and remove it
-         * Input: Stack of real numbers
-         * Output: The largest number in the stack
-         * Working principle:
-         * 1. Create a temporary stack
-         * 2. Traverse the original stack, finding the largest number
-         * 3. Remove the largest number and restore the original stack
-         *
-         * Time complexity: O(n), where n - number of elements in the stack
-         * - First loop (finding maximum): O(n)
-         * - Second loop (restoring stack): O(n)
+        /*  Функция ищет наибольшее вещественное число в стеке и удаляет его
          * Total: O(n) + O(n) = O(2n) = O(n)
          */
         Stack<Double> temp = new <Double>Stack();

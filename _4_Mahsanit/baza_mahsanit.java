@@ -17,8 +17,30 @@ public class baza_mahsanit {
     Stack<String> st = new Stack<String>();
     */
 
+    // Метод для клонирования стека
+    public static Stack<Integer> cloneStack(Stack<Integer> originalStack){
+        Stack<Integer> clone = new Stack<>();
+        Stack<Integer> temp = new Stack<>();
 
-    // Метод для печати стека
+        // 1. Перекладываем все элементы из оригинального стека во временный.
+        // Это перевернет порядок элементов.
+        while (!originalStack.isEmpty()) {
+            temp.push(originalStack.pop());
+        }
+        // 2. Теперь перекладываем элементы из временного стека обратно в оригинальный
+        // и одновременно в новый (клонированный) стек.
+        // Это вернет исходный порядок в обоих стеках.
+        while (!temp.isEmpty()) {
+            int value = temp.pop();
+            originalStack.push(value);
+            clone.push(value);
+        }
+        // Возвращаем созданный клон
+        return clone;
+    }
+
+
+    // Метод для печати стека Character
     public static void printStack(Stack<Character> stack) {
         Stack<Character> tempStack = new Stack<>();
         // Перекладываем и печатаем элементы
@@ -33,6 +55,7 @@ public class baza_mahsanit {
         }
     }
 
+    // Метод для печати стека Int
     public static void printStackInt(Stack<Integer> stack) {
         // Создаем временный стек для хранения элементов
         Stack<Integer> tempStack = new Stack<Integer>();
