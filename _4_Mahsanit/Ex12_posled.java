@@ -2,7 +2,7 @@ package _4_Mahsanit;
 
 import unit4.collectionsLib.Stack;
 
-public class Mahsanit_t22 {
+public class Ex12_posled {
     public static void main(String[] args) {
         Stack<Integer> st = new <Integer>Stack();
 

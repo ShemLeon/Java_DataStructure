@@ -69,7 +69,31 @@ public class baza_mahsanit {
         // Возвращаем элементы обратно
         while (!tempStack.isEmpty()) {
             stack.push(tempStack.pop());
-        }}
+        }
+    }
+
+    // Поиск элемента в стеке.
+    public static boolean searchInt(Stack<Integer> stack, int valueToFind) {
+        Stack<Integer> tempStack = new Stack<Integer>();
+        boolean found = false;
+
+        // Перемещаем элементы из исходного стека во временный,
+        // ищем нужный элемент в процессе.
+        while (!stack.isEmpty()) {
+            int top = stack.pop();
+            if (top == valueToFind) {
+                found = true;
+            }
+            tempStack.push(top);
+        }
+
+        // Восстанавливаем исходный стек, перекладывая элементы обратно из временного стека.
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+
+        return found;
+    }
 
 
     public static void main(String[] args) {
