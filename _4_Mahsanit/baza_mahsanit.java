@@ -76,7 +76,6 @@ public class baza_mahsanit {
     public static boolean searchInt(Stack<Integer> stack, int valueToFind) {
         Stack<Integer> tempStack = new Stack<Integer>();
         boolean found = false;
-
         // Перемещаем элементы из исходного стека во временный,
         // ищем нужный элемент в процессе.
         while (!stack.isEmpty()) {
@@ -86,12 +85,10 @@ public class baza_mahsanit {
             }
             tempStack.push(top);
         }
-
         // Восстанавливаем исходный стек, перекладывая элементы обратно из временного стека.
         while (!tempStack.isEmpty()) {
             stack.push(tempStack.pop());
         }
-
         return found;
     }
 
@@ -151,6 +148,15 @@ public class baza_mahsanit {
             words.push(tempCount.pop());
         }
         System.out.println("Количество элементов: " + count);
+    }
+
+    public static Stack<Integer> createStackFromArray(int arr[]){
+        Stack<Integer> st = new Stack<>();
+        // Добавляем элементы массива в стек
+        for (int element : arr) {
+            st.push(element);
+        }
+        return st;
     }
 
 
