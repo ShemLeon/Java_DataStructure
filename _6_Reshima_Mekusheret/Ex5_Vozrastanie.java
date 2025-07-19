@@ -2,9 +2,9 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
 /**
- проверка сортировка по возрастанию
+ проверка или список отсортирован по возрастанию
  */
-public class Ex5_Matala_30 {
+public class Ex5_Vozrastanie {
     public static void main(String[] args) {
         Node<Integer> list1 = createList(new int[]{1, 2, 3, 4, 5}); // Sorted list
         Node<Integer> list2 = createList(new int[]{1, 3, 0, 4, 5}); // Unsorted list
@@ -13,17 +13,6 @@ public class Ex5_Matala_30 {
         System.out.println("List 2 is sorted in ascending order: " + isAscending(list2));
     }
 
-    /**
-     * Function to check if a linked list is sorted in ascending order
-     * @param head head node of the linked list
-     * @return true if elements are sorted in ascending order, false otherwise
-     * Complexity: O(n), where n is the number of nodes in the list. Each node is visited once
-     * Working principle:
-     * 1. Check base cases (empty list or list with one element)
-     * 2. Traverse the list, comparing each element with the next
-     * 3. If a violation of the ascending order is found, return false
-     * 4. If reached the end of the list without violations, return true
-     */
     public static boolean isAscending(Node<Integer> head) {
         if (head == null || head.getNext() == null) {
             return true; // An empty list or a list with one element is considered sorted

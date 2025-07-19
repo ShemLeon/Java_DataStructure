@@ -17,6 +17,34 @@ public class baza_queue {
     Queue<String> t = new Queue<String>();
     */
 
+    public static void printQu(Queue<Integer> queue) {
+        // пропечатает очередь и восстановит ее
+        if (queue == null) {
+            System.out.println("Error: queue is not initialized");
+            return;
+        }
+
+        if (queue.isEmpty()) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        Queue<Integer> tempQueue = new Queue<Integer>();
+
+        System.out.print("Queue contents: ");
+        while (!queue.isEmpty()) {
+            int element = queue.remove();
+            System.out.print(element + " ");
+            tempQueue.insert(element);
+        }
+        System.out.println();
+
+        // Восстанавливаем исходную очередь
+        while (!tempQueue.isEmpty()) {
+            queue.insert(tempQueue.remove());
+        }
+    }
+
     public static int findMax(Queue<Integer> queue) {
         // Check for null
         if (queue == null) {

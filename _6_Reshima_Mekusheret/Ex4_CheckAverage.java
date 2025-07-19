@@ -1,25 +1,12 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
-/* Class contains functions for working with a linked list of real numbers,
- * including checking for equality of the number of elements above and below the average value
- */
-public class Ex4_Matala_29 {
+// проверка равенства количества элементов выше и ниже среднего в списке
+public class Ex4_CheckAverage {
     public static void main(String[] args) {
         Node<Double> list = createList(new double[]{1.5, 2.0, 3.5, 6.0, 7.5, 9.0}); // Example list
         System.out.println("Result of equality check: " + isEqualAboveBelowAverage(list));
     }
-
-    /* Function to check for equality of the number of elements above and below the average in the list
-     * @param head head node of the linked list of real numbers
-     * @return true if the number of elements above the average equals the number below, otherwise false
-     * Complexity: O(n) time, where n is the number of nodes (two passes through the list), O(1) memory
-     * Working principle:
-     * 1. First pass: calculate the sum and count of elements for the average
-     * 2. Calculate the average value
-     * 3. Second pass: count elements above and below the average
-     * 4. Compare the counts of elements above and below the average
-     */
     public static boolean isEqualAboveBelowAverage(Node<Double> head) {
         if (head == null) return false; // Empty list
 

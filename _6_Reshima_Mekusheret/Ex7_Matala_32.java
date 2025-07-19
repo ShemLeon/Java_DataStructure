@@ -2,11 +2,6 @@ package _6_Reshima_Mekusheret;
 
 import unit4.collectionsLib.Node;
 
-// Submitters:
-// Evgeny Namchenko 321404634
-// Shmiakin Leonid 336540331
-// Class 48-5
-
 /**
  * The class contains functions for working with a linked list of floating point numbers,
  * including checking for the presence of a given number in the list.
@@ -34,16 +29,6 @@ public class Ex7_Matala_32 {
         return false; // Number not found
     }
 
-    /**
-     * Function to create a linked list from an array of floating point numbers
-     * @param values array of numbers to convert to a linked list
-     * @return head node of the created linked list
-     * Complexity: O(n), where n is the size of the input array
-     * Working principle:
-     * 1. Initialize an empty list
-     * 2. Traverse the array of values
-     * 3. For each value, create a new node and add it to the end of the list
-     */
     public static Node<Double> createList(double[] values) {
         Node<Double> head = null;
         Node<Double> current = null;

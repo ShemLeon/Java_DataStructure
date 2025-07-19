@@ -2,22 +2,14 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
 
-public class Ex3_Matala_28 {
+public class Ex3_SumAll {
     public static void main(String[] args) {
         Node<Integer> rm = createList(new int[]{5, 5, 15, 5, 5, 25}); // Example list
         System.out.println("Sum of list elements: " + sumOfList(rm)); // 60
         printList(rm);
     }
 
-    /* Function to calculate the sum of all elements in a linked list
-     * @param head head node of the linked list
-     * @return sum of all integers in the list
-     * Complexity: O(n) time, where n is the number of nodes, O(1) memory
-     * Working principle:
-     * 1. Start with the first node
-     * 2. Traverse all nodes, adding the value of each to the sum
-     * 3. Return the total sum
-     */
+    // считает сумму элементов листа
     public static int sumOfList(Node<Integer> head) {
         int sum = 0;
         Node<Integer> current = head;
