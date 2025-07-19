@@ -75,37 +75,45 @@ public class Ex3_CustomerObj {
         Queue<Customer> temp1 = new Queue<Customer>();
         Queue<Customer> temp2 = new Queue<Customer>();
 
-        // Copy elements to temporary queues
-        while (!queue1.isEmpty()) temp1.insert(queue1.remove());
-        while (!queue2.isEmpty()) temp2.insert(queue2.remove());
-
-        // Alternating customers from both queues
-        while (!temp1.isEmpty() && !temp2.isEmpty()) {
-            result.insert(temp1.remove());
-            result.insert(temp2.remove());
+        // Копируем элементы в временные очереди и восстанавливаем исходные
+        while (!queue1.isEmpty()) {
+            Customer c = queue1.remove();
+            temp1.insert(c);
+        }
+        while (!temp1.isEmpty()) {
+            queue1.insert(temp1.remove());
+        }
+        
+        while (!queue2.isEmpty()) {
+            Customer c = queue2.remove();
+            temp2.insert(c);
+        }
+        while (!temp2.isEmpty()) {
+            queue2.insert(temp2.remove());
         }
 
-        // Add remaining customers
-        while (!temp1.isEmpty()) result.insert(temp1.remove());
-        while (!temp2.isEmpty()) result.insert(temp2.remove());
-
-        // Restore the original queues
-        Queue<Customer> tempResult = new Queue<Customer>();
-        while (!result.isEmpty()) {
-            Customer c = result.remove();
-            tempResult.insert(c);
-            if (!temp1.isEmpty()) queue1.insert(temp1.remove());
-            if (!temp2.isEmpty()) queue2.insert(temp2.remove());
+        // Теперь работаем с копиями для создания новой очереди
+        while (!queue1.isEmpty() && !queue2.isEmpty()) {
+            result.insert(queue1.remove());
+            result.insert(queue2.remove());
         }
 
-        while (!tempResult.isEmpty()) {
-            result.insert(tempResult.remove());
+        // Добавляем оставшиеся элементы
+        while (!queue1.isEmpty()) result.insert(queue1.remove());
+        while (!queue2.isEmpty()) result.insert(queue2.remove());
+        
+        // Восстанавливаем исходные очереди из временных
+        while (!temp1.isEmpty()) {
+            queue1.insert(temp1.remove());
+        }
+        while (!temp2.isEmpty()) {
+            queue2.insert(temp2.remove());
         }
 
         return result;
     }
 
-    private static void printQueue(Queue<Customer> queue) {
+    private static void printQueueObj(Queue<Customer> queue) {
         Queue<Customer> temp = new Queue<Customer>();
         while (!queue.isEmpty()) {
             Customer c = queue.remove();
@@ -132,13 +140,13 @@ public class Ex3_CustomerObj {
         addCustomer(queue2, new Customer("Сергей", 1, "567-890"));
 
         System.out.println("Queue 1:");
-        printQueue(queue1);
+        printQueueObj(queue1);
         
         System.out.println("\nQueue 2:");
-        printQueue(queue2);
+        printQueueObj(queue2);
 
         Queue<Customer> mergedQueue = mergeTwoQueues(queue1, queue2);
         System.out.println("\nMerged queue:");
-        printQueue(mergedQueue);
+        printQueueObj(mergedQueue);
     }
 }

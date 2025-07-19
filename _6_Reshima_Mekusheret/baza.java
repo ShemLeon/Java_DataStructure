@@ -50,7 +50,7 @@ public class baza {
         System.out.println(c); // 7
         System.out.println(c.getNext());  // 500
         System.out.println(c.toString());
-
+        System.out.println(c.hasNext());
         Node<Integer> list = createList(new int[]{90, 5, 15, 5, 5, 25}); // Example list
         printList(list);
     }

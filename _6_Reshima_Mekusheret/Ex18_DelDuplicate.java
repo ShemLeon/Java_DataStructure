@@ -1,19 +1,20 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
+import static _6_Reshima_Mekusheret.Ex17_CountTarget.countTarget;
 import static _6_Reshima_Mekusheret.baza.createList;
 import static _6_Reshima_Mekusheret.baza.printList;
 
-public class Ex17_DelDuplicate {
-    // Ex17: удаляет все числа, которые не уникальны из связного списка.
+public class Ex18_DelDuplicate {
+    // Ex18: удаляет все числа, которые не уникальны из связного списка.
     public static Node<Integer> deleteDuplicates(Node<Integer> head) {
         if (head == null) return null;
         Node<Integer> tempList = null; // временный список для уникальных элементов
         Node<Integer> tempTail = null;
-        
+
         while (head != null) {
             int value = head.getValue();
-            int count = countOccurrences(head, value);
+            int count = countTarget(head, value);
             if (count == 1) {
                 // Элемент уникальный - удаляем из исходного и добавляем в temp
                 Node<Integer> uniqueNode = new Node<>(value);
@@ -34,20 +35,7 @@ public class Ex17_DelDuplicate {
         return tempList;
     }
     
-    // Подсчитывает количество вхождений значения в списке
-    private static int countOccurrences(Node<Integer> head, int value) {
-        int count = 0;
-        Node<Integer> current = head;
-        
-        while (current != null) {
-            if (current.getValue() == value) {
-                count++;
-            }
-            current = current.getNext();
-        }
-        
-        return count;
-    }
+
 
     public static void main(String[] args) {
         // Тест 1
