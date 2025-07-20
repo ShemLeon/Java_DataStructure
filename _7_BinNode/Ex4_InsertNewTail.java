@@ -1,12 +1,43 @@
 package _7_BinNode;
 import unit4.collectionsLib.BinNode;
 
-/**
- * Class containing functions for working with a doubly linked list,
- * including inserting an element at the end of the list and printing the list
- * in both directions
- */
-public class bn_Matala43 {
+import static _7_BinNode.Ex1_createFromArray.createList;
+
+
+public class Ex4_InsertNewTail {
+    // вставку элемента в конец списка
+    /* Функция для "вставки нового элемента в конец двусвязного списка"
+     * @param head головной узел списка
+     * @param num значение для вставки
+     * Сложность: O(n), где n - количество узлов в списке
+     * Принцип работы:
+     * 1. Проверяем, что список не пуст
+     * 2. Находим последний узел:
+     *    - Проходим вправо до достижения конца (hasRight == false)
+     * 3. Создаем новый узел и связываем его:
+     *    - Создаем узел с новым значением
+     *    - Устанавливаем правую связь последнего узла
+     *    - Устанавливаем левую связь нового узла
+     */
+
+    public static void insertEndBNlist(BinNode<Integer> head, int num) {
+        if (head == null) {
+            System.out.println("Список не может быть пустым.");
+            return;
+        }
+
+        // Находим последний узел
+        BinNode<Integer> current = head;
+        while (current.hasRight()) {
+            current = current.getRight();
+        }
+
+        // Создаем и связываем новый узел
+        BinNode<Integer> temp = new BinNode<>(num);
+        current.setRight(temp);
+        temp.setLeft(current);
+
+    }
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 3, 2, 4};
 
@@ -19,36 +50,7 @@ public class bn_Matala43 {
         printList(bnList);
     }
 
-    /* Function for "inserting a new element at the end of a doubly linked list"
-     * @param head the head node of the list
-     * @param num the value to insert
-     * Complexity: O(n), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Check if the list is not empty
-     * 2. Find the last node:
-     *    - Traverse right until reaching the end (hasRight == false)
-     * 3. Create a new node and link it:
-     *    - Create a node with the new value
-     *    - Set the right link of the last node
-     *    - Set the left link of the new node
-     */
-    public static void insertEndBNlist(BinNode<Integer> head, int num) {
-        if (head == null) {
-            System.out.println("The list cannot be empty.");
-            return;
-        }
 
-        // Find the last node
-        BinNode<Integer> current = head;
-        while (current.hasRight()) {
-            current = current.getRight();
-        }
-
-        // Create and link a new node
-        BinNode<Integer> temp = new BinNode<>(num);
-        current.setRight(temp);
-        temp.setLeft(current);
-    }
 
     /* Function for "creating a doubly linked list from an array"
      * @param values the array of values to create the list
@@ -62,34 +64,7 @@ public class bn_Matala43 {
      *    - Otherwise, link it with the previous node
      * 3. Return the head of the list
      */
-    public static BinNode<Integer> createList(int[] values) {
-        BinNode<Integer> head = null;
-        BinNode<Integer> current = null;
 
-        for (int bafer : values) {
-            BinNode<Integer> newBinNode = new BinNode<>(bafer);
-            if (head == null) {
-                head = newBinNode;
-                current = head;
-            } else {
-                current.setRight(newBinNode);
-                newBinNode.setLeft(current);
-                current = newBinNode;
-            }
-        }
-        return head;
-    }
-
-    /* Function for "printing the list from left to right"
-     * @param head the head node of the list
-     * Complexity: O(n), where n is the number of nodes in the list
-     * Working principle:
-     * 1. Start with the first node
-     * 2. Until reaching the end of the list:
-     *    - Print the value of the current node
-     *    - If there is a next node, print a separator
-     *    - Move to the next node
-     */
     public static void printList(BinNode<Integer> head) {
         BinNode<Integer> current = head;
         while (current != null) {

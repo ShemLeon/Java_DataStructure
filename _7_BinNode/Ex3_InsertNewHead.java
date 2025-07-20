@@ -2,26 +2,9 @@ package _7_BinNode;
 import unit4.collectionsLib.BinNode;
 
 
-/**
- * Class contains functions for working with a doubly linked list,
-    * including inserting a new element at the beginning of the list and printing the list
-    * in both directions
- */
-public class bn_Matala42 {
-    public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 3, 2, 1};
-
-        BinNode<Integer> bnList = createList(arr);
-        System.out.println("Original list:");
-        printList(createList(arr));
-
-        System.out.println("After inserting 333 at the beginning:");
-        insertHeadBNlist(bnList, 333);
-        printList(bnList);
-    }
-
+public class Ex3_InsertNewHead {
     /**
-     * Function to "insert a new element at the beginning of a doubly linked list"
+     * Функция "вставки нового элемента в начало двусвязного списка"
      * @param head current starting node of the list
      * @param num value to insert
      * Complexity: O(1), since only operations on the starting node are performed
@@ -41,24 +24,33 @@ public class bn_Matala42 {
             System.out.println("Список не может быть пустым.");
             return;
         }
-
         // Create a new node with the current head value
         BinNode<Integer> temp = new BinNode<>(head.getValue());
-
         // Check if the head has a right node
         if (head.hasRight()) {
             temp.setRight(head.getRight());
             head.getRight().setLeft(temp);
         }
-
         // Update the head value and its links
         head.setValue(num);
         head.setRight(temp);
         head.setLeft(null);
-
         // Set the left link of the new node to the head
         temp.setLeft(head);
     }
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 3, 2, 1};
+
+        BinNode<Integer> bnList = createList(arr);
+        System.out.println("Original list:");
+        printList(createList(arr));
+
+        System.out.println("After inserting 333 at the beginning:");
+        insertHeadBNlist(bnList, 333);
+        printList(bnList);
+    }
+
+
 
     /**
      * Function to "create a doubly linked list from an array"

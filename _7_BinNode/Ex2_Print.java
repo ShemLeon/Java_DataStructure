@@ -2,17 +2,19 @@ package _7_BinNode;
 
 import unit4.collectionsLib.BinNode;
 
+import static _7_BinNode.Ex1_createFromArray.createList;
+
 /**
  * Класс содержит базовые функции для работы с двусвязным списком:
  * - Печать списка в обоих направлениях
  * - Добавление узлов в список
  */
-public class BiinNode_1 {
+public class Ex2_Print {
     public static void main(String[] args) {
         // Создаем тестовый список из массива
         int[] arr = {1, 2, 3, 4, 5};
         System.out.println("1. Создаем список из массива:");
-        BinNode<Integer> list = baza.createList(arr);
+        BinNode<Integer> list = createList(arr);
         printToRight(list);
         
         // Печатаем список в обоих направлениях
@@ -51,6 +53,7 @@ public class BiinNode_1 {
         }
         System.out.println();
     }
+
 
     /* Функция для "вывода списка справа налево"
      * @param h начальный узел списка
