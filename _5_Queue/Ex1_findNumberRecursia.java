@@ -1,17 +1,17 @@
 package _5_Queue;
 import unit4.collectionsLib.Queue;
 
-public class Ex1_findNumber {
+import static _5_Queue.Ex4_recursiaCounting.countQuIntSize;
+
+public class Ex1_findNumberRecursia {
     // проверка наличия номера в очереди
     public static boolean isNumberInQueue(Queue<Integer> queue, int number) {
         if (queue == null || queue.isEmpty()) {     // Check
             System.out.println("Error:");
             return false;
         }
-
         Queue<Integer> tempQueue = new Queue<Integer>();
         boolean found = false;
-
         // Check each element
         while (!queue.isEmpty()) {
             int current = queue.remove();
@@ -20,13 +20,36 @@ public class Ex1_findNumber {
             }
             tempQueue.insert(current);
         }
-
         // Restore the original queue
         while (!tempQueue.isEmpty()) {
             queue.insert(tempQueue.remove());
         }
-
         return found;
+    }
+
+    // Рекурсивный вариант
+    public static boolean isNumberInQueueRecursive(Queue<Integer> queue, int number) {
+        if (queue == null || queue.isEmpty()) {
+            if (queue == null) {
+                System.out.println("Error: queue is null");
+            }
+            return false;
+        }
+        // Сначала получаем размер, не изменяя очередь
+        int size = countQuIntSize(queue);
+        // Вызываем рекурсивного помощника
+        return findAndRestore(queue, number, size);
+    }
+
+    private static boolean findAndRestore(Queue<Integer> queue, int number, int n) {
+        if (n == 0) return false;
+        int current = queue.remove();
+        queue.insert(current); // "Прокручиваем" очередь
+        // Рекурсивный вызов для оставшихся n-1 элементов
+        boolean foundInRest = findAndRestore(queue, number, n - 1);
+        // Проверяем текущий элемент ПОСЛЕ того, как вся очередь была прокручена
+        // и рекурсия вернулась на этот уровень.
+        return (current == number) || foundInRest;
     }
 
     public static void main(String[] args) {

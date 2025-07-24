@@ -809,19 +809,19 @@ public static int getMaxWidth(BinNode<Integer> t) {
     return maxWidth;
 }
 
-private static int getQueueSize(Queue<BinNode<Integer>> queue) {
+public static int getQueueSize(Queue<BinNode<Integer>> queue) {
     int size = 0;
     Queue<BinNode<Integer>> temp = new Queue<>();
-    
+
     while (!queue.isEmpty()) {
         temp.insert(queue.remove());
         size++;
     }
-    
+
     while (!temp.isEmpty()) {
         queue.insert(temp.remove());
     }
-    
+
     return size;
 }
 

@@ -1,7 +1,7 @@
 package _5_Queue;
 import unit4.collectionsLib.Queue;
 
-import static _5_Queue.Ex1_findNumber.isNumberInQueue;
+import static _5_Queue.Ex1_findNumberRecursia.isNumberInQueue;
 
 public class Ex2_newQuDuplicates {
     public static Queue<Integer> removeDuplicates(Queue<Integer> queue) {

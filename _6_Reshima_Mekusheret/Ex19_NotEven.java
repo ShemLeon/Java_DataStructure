@@ -1,9 +1,6 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
-import static _6_Reshima_Mekusheret.Ex17_CountTarget.countTarget;
-import static _6_Reshima_Mekusheret.baza.createList;
-import static _6_Reshima_Mekusheret.baza.printList;
 
 public class Ex19_NotEven {
     // Ex19: Проверка, что у всех элементов, сумма их цифр не кратна 2.
