@@ -7,7 +7,7 @@ public class Ex11_CountElem {
      * Вспомогательный метод для подсчета количества вхождений элемента в очереди.
      * @return количество вхождений.
      */
-    static int countOccurrences(Queue<Integer> q, int value) {
+    public static int countOccurrences(Queue<Integer> q, int value) {
         int count = 0;
         int originalSize = q.size();
         for (int i = 0; i < originalSize; i++) {
