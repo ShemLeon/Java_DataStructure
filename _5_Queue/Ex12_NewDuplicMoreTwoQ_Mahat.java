@@ -15,10 +15,7 @@ public class Ex12_NewDuplicMoreTwoQ_Mahat {
      */
     public static Queue<Integer> newDuplicMoreTwo(Queue<Integer> q) {
         if (q == null || q.isEmpty()) return q;
-        // 1. Сортируем очередь
-        sortQueueInt(q);
-        System.out.println(" ");
-        printQueueInt(q);
+        sortQueueInt(q);// 1. Сортируем очередь
         Queue<Integer> resultQ = new Queue<Integer>();
         // 2. Проходим по отсортированной очереди и подсчитываем повторения
         while (!q.isEmpty()) {

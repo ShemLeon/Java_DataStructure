@@ -19,7 +19,7 @@ public class Ex7_sortQu {
     public static void sortQueueInt(Queue<Integer> queue) {
         Queue<Integer> sortedQueue = new Queue<>();
         while (!queue.isEmpty()) {
-            int min = findAndRemoveMinInt(queue); // Теперь используем исправленную версию
+            int min = findAndRemoveMinInt(queue);
             sortedQueue.insert(min);
         }
         while (!sortedQueue.isEmpty()) {
