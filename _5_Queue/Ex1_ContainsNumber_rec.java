@@ -3,7 +3,7 @@ import unit4.collectionsLib.Queue;
 
 import static _5_Queue.Ex4_recursiaCounting.countQuIntSize;
 
-public class Ex1_findNumberRecursia {
+public class Ex1_ContainsNumber_rec {
     // проверка наличия номера в очереди
     public static boolean isNumberInQueue(Queue<Integer> queue, int number) {
         if (queue == null || queue.isEmpty()) {     // Check

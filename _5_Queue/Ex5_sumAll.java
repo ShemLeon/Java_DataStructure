@@ -16,6 +16,34 @@ public class Ex5_sumAll {
         }
         return sum;
     }
+
+    /**
+     * Подсчет суммы всех элементов в очереди (рекурсивный вариант)
+     * @param queue очередь с числами
+     * @return сумма всех элементов
+     * Complexity: O(n), где n - количество элементов в очереди
+     */
+    public static int sumQueueRecursive(Queue<Integer> queue) {
+        // Базовый случай: если очередь пуста, сумма равна 0
+        if (queue.isEmpty()) {
+            return 0;
+        }
+
+        // Извлекаем первый элемент
+        int current = queue.remove();
+
+        // Рекурсивно вычисляем сумму оставшихся элементов
+        int remainingSum = sumQueueRecursive(queue);
+
+        // Восстанавливаем элемент обратно в очередь
+        queue.insert(current);
+
+        // Возвращаем сумму текущего элемента и оставшихся
+        return current + remainingSum;
+    }
+
+
+
     public static void main(String[] args) {
         Queue<Integer> queue = new Queue<>();
         queue.insert(1);

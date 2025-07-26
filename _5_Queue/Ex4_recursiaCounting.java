@@ -4,7 +4,7 @@ import unit4.collectionsLib.Queue;
 
 public class Ex4_recursiaCounting {
     public static int countQuCharElements(Queue<Character> queue) {
-        // Подсчет количества элементов рекурсивно
+        // Подсчет количества элементов очереди рекурсивно
         // Complexity: * Time complexity: O(n), where n is the number of elements in the queue
         if (queue.isEmpty()) return 0;
         Character element = queue.remove();

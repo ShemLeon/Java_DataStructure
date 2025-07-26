@@ -1,15 +1,13 @@
 package _5_Queue;
 import unit4.collectionsLib.Queue;
 
-import static _5_Queue.Ex1_findNumberRecursia.isNumberInQueue;
+import static _5_Queue.Ex1_ContainsNumber_rec.isNumberInQueue;
 
-public class Ex2_newQuDuplicates {
+public class Ex2_WithoutDuplicates {
     public static Queue<Integer> removeDuplicates(Queue<Integer> queue) {
         /**
-         * Creates a new queue without duplicates from the original queue
-         * @param queue original queue with numbers
-         * @return new queue where each number appears only once
-         * Complexity: O(n^2) - where n is the number of elements in the queue
+         Создает новую очередь без дубликатов
+         Complexity: O(n^2) - where n is the number of elements in the queue
          */
         if (queue == null || queue.isEmpty()) {
             System.out.println("Error: queue is empty or not initialized");

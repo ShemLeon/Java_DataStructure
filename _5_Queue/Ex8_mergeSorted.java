@@ -2,7 +2,7 @@ package _5_Queue;
 import unit4.collectionsLib.Queue;
 
 
-public class Ex7_mergeSorted {
+public class Ex8_mergeSorted {
     // объединение двух отсортированных очередей в одну отсортированную
     public static Queue<String> mergeSortedQueues(Queue<String> queue1, Queue<String> queue2) {
         Queue<String> mergedQueue = new Queue<>();

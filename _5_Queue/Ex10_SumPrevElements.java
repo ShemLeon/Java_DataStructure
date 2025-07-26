@@ -4,7 +4,7 @@ import unit4.collectionsLib.Queue;
 import static _5_Queue.Ex0_printQuInt.printQueueInt;
 
 
-public class Ex8_SumPrevElements {
+public class Ex10_SumPrevElements {
     // строит из полученной новую очередь, где каждый следующий элемент равен сумме всех предыдущих
     // 1-2-3-4  ->  1-3-6-10
     public static void SumPrevElements(Queue<Integer> queOrigin) {
