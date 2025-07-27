@@ -1,6 +1,8 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
+
 
 /**
  * Class contains functions for working with a sorted linked list of integers,
@@ -31,21 +33,6 @@ public class Ex10_Matala_37 {
         return head;
     }
 
-
-
-
-    public static void printList(Node<Integer> head) {
-        Node<Integer> current = head;
-        while (current != null) {
-            System.out.print(current.getValue());
-            if (current.getNext() != null) {
-                System.out.print(" -> ");
-            }
-            current = current.getNext();
-        }
-        System.out.println();
-    }
-    
     /**
      * Function to create a test sorted linked list
      * @param values array of values to create the list
@@ -82,24 +69,24 @@ public class Ex10_Matala_37 {
         int[] testValues = {1, 3, 5, 7, 9};
         Node<Integer> list = createTestList(testValues);
         System.out.println("Original sorted list:");
-        printList(list);
+        printListInt(list);
 
         // Add a new number
         int newNumber = 4;
         list = insertSorted(list, newNumber);
         System.out.println("List after adding number " + newNumber + ":");
-        printList(list);
+        printListInt(list);
 
         // Test adding to the beginning of the list
         newNumber = 0;
         list = insertSorted(list, newNumber);
         System.out.println("List after adding number " + newNumber + ":");
-        printList(list);
+        printListInt(list);
 
         // Test adding to the end of the list
         newNumber = 10;
         list = insertSorted(list, newNumber);
         System.out.println("List after adding number " + newNumber + ":");
-        printList(list);
+        printListInt(list);
     }
 }

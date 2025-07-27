@@ -1,6 +1,8 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+
 /**
  проверка или список отсортирован по возрастанию
  */
@@ -30,30 +32,4 @@ public class Ex5_Vozrastanie {
         return true; // All elements are sorted in ascending order
     }
 
-    /**
-     * Function to create a linked list from an array of integers
-     * @param values array of integers to convert into a list
-     * @return head node of the created linked list
-     * Complexity: O(n) time, where n is the length of the array, O(n) memory
-     * Working principle:
-     * 1. Create the first node if the array is not empty
-     * 2. Add the remaining elements to the end of the list
-     * 3. Return the head of the list
-     */
-    public static Node<Integer> createList(int[] values) {
-        Node<Integer> head = null;
-        Node<Integer> current = null;
-        for (int value : values) {
-            // Add to the list
-            Node<Integer> newNode = new Node<>(value);
-            if (head == null) {
-                head = newNode;
-                current = head;
-            } else {
-                current.setNext(newNode);
-                current = current.getNext();
-            }
-        }
-        return head;
-    }
 }

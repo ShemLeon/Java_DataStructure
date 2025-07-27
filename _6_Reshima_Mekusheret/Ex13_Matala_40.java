@@ -1,8 +1,7 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
-import static _6_Reshima_Mekusheret.baza.createList;
-import static _6_Reshima_Mekusheret.baza.printList;
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
 // Проверка на наличие последовательности n последовательных чисел  в связном списке целых чисел.
 // Последовательность может быть возрастающей или убывающей.
@@ -11,7 +10,7 @@ public class Ex13_Matala_40 {
     public static void main(String[] args) {
         int testArr[] = {1, 2, 3, 4, 77, 5, 6, 7, 0, 9, 10};
         Node<Integer> list = createList(testArr);
-        printList(list);
+        printListInt(list);
         int num = 5;
         System.out.println("There is a sequence of length " + num + ": " + checkListSequence(list, num));
         num = 4;

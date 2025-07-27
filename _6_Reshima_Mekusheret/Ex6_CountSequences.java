@@ -1,18 +1,15 @@
 package _6_Reshima_Mekusheret;
-
 import unit4.collectionsLib.Node;
-import java.util.HashSet;
-import java.util.Set;
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
-import static _6_Reshima_Mekusheret.baza.createList;
-import static _6_Reshima_Mekusheret.baza.printList;
 
 // * Класс содержит функции для работы со связным списком целых чисел,
 // * включая подсчет количества последовательностей заданного числа.
 public class Ex6_CountSequences {
     public static void main(String[] args) {
         Node<Integer> list = createList(new int[]{2, 7, 5, 3, 2, 2, 1, 1, 2, 2}); // Example list
-        printList(list);
+        printListInt(list);
         int number = 2; // Target number
         System.out.println("Number of sequences of " + number + ": " + countSequences(list, number));
     }

@@ -1,8 +1,8 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
-import static _6_Reshima_Mekusheret.baza.createList;
-import static _6_Reshima_Mekusheret.baza.printList;
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
 // в решима мекушерет надо каждые 3 узла проверить и оставить только максимальный из них
 public class Ex16_3maximum {
@@ -52,11 +52,11 @@ public class Ex16_3maximum {
     public static void main(String[] args){
         Node<Integer> head = createList(new int[]{22, 21, 14, 13, 8, 4, 6, 7, 9});
         System.out.println("Исходный список:");
-        printList(head);
+        printListInt(head);
         
         head = reorgList(head);
         
         System.out.println("После реорганизации:");
-        printList(head);
+        printListInt(head);
     }
 }

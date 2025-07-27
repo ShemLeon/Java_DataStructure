@@ -2,6 +2,9 @@ package _6_Reshima_Mekusheret;
 
 import unit4.collectionsLib.Node;
 
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
+
 public class baza {
     /*
     Basic methods and techniques for "Linked List" / "רשימה מקושרת"
@@ -52,36 +55,7 @@ public class baza {
         System.out.println(c.toString());
         System.out.println(c.hasNext());
         Node<Integer> list = createList(new int[]{90, 5, 15, 5, 5, 25}); // Example list
-        printList(list);
-    }
+        printListInt(list);
+    }}
 
 
-    public static Node<Integer> createList(int[] arr) {
-        // create a list from arr.
-        Node<Integer> head = null;
-        Node<Integer> current = null;
-        for(int i = 0; i < arr.length; i++) {
-            if (head == null) { // для создания головы.
-                head = new Node<>(arr[0]);
-                current = head;
-            } else {
-                current.setNext(new Node<>(arr[i]));
-                current = current.getNext();
-            }
-        }
-        return head;
-    }
-
-    public static void printList(Node<Integer> head) {
-        // print the list
-        Node<Integer> current = head;
-        while (current != null) {
-            System.out.print(current.getValue());
-            if (current.getNext() != null) {
-                System.out.print(" -> ");
-            }
-            current = current.getNext();
-        }
-        System.out.println();
-    }
-}

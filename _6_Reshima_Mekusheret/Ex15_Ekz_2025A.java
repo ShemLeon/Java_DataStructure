@@ -1,8 +1,8 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
-import static _6_Reshima_Mekusheret.baza.createList;
-import static _6_Reshima_Mekusheret.baza.printList;
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
 public class Ex15_Ekz_2025A {
     // Ф-я получает связный список из целых чисел и удаляет значения,
@@ -13,11 +13,11 @@ public class Ex15_Ekz_2025A {
         int[] arr = {14, 21, 28, 49, 49, 63, 70, 100};
         Node<Integer> myList = createList(arr);
         System.out.println("Original list:");
-        printList(myList);
+        printListInt(myList);
         System.out.println("Измененный list:");
         // Правильный вызов
         myList = reorgList(myList);
-        printList(myList);
+        printListInt(myList);
     }
 
     public static Node<Integer> reorgList(Node<Integer> head){

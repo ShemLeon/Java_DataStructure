@@ -3,13 +3,13 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 import java.util.Scanner;
 import static _6_Reshima_Mekusheret.Ex10_Matala_37.insertSorted;
-import static _6_Reshima_Mekusheret.baza.printList;
+import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
 public class Ex11_Matala_38 {
     public static void main(String[] args) {
         Node<Integer> sortedList = createSortedList();
         System.out.println("\nОтсортированный список:");
-        printList(sortedList);
+        printListInt(sortedList);
     }
     /**
      * Функция для "создания отсортированного связного списка из пользовательского ввода"
