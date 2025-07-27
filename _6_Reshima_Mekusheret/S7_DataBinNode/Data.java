@@ -1,18 +1,21 @@
-package _7_BinNode.S7_DataBinNode;
-import unit4.collectionsLib.BinNode;
-
+package _6_Reshima_Mekusheret.S7_DataBinNode;
+import unit4.collectionsLib.Node;
 
 public class Data {
     private boolean free;
     private int size;
-    public Data(boolean free, int size) {
-        this.free = free;
+    public Data(int size) {
+        this.free = true;
         this.size = size;
     }
     public boolean isFree(){return free;}
     public int getSize() {return size;}
-    public void setSize(int size) {this.size = size;}
-    public void setFree(boolean free) {this.free = free;}
+    public void setFree(boolean free) {
+        this.free = free;
+    }
+    public void setSize(int size) {
+        this.size = size;
+    }
 }
 
 /*
