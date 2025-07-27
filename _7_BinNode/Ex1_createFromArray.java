@@ -4,10 +4,10 @@ import unit4.collectionsLib.BinNode;
 
 public class Ex1_createFromArray {
     /**
-     * Function for "creating a doubly linked list from an array"
+     Создание двусвязного списка из массива
      * @param values array of values
      * @return the head node of the created list
-     * Complexity: O(n), where n is the size of the array
+     * Complexity: O(n)
      * Principle of operation:
      * 1. Start with an empty list
      * 2. For each element in the array:
@@ -32,6 +32,4 @@ public class Ex1_createFromArray {
         }
         return head;
     }
-
-
 }

@@ -1,11 +1,13 @@
 package _7_BinNode;
 import unit4.collectionsLib.BinNode;
 
-// Write a function that takes an int n and returns a BinNode of consecutive integers
-public class bn_targil1 {
+import static _7_BinNode.Ex2_Print.printList;
+
+// функция принимает целое число n и возвращает двусвязный список из последовательных целых чисел
+public class Ex6_From1ToN {
     public static void main(String[] args) {
       createOkevList(5);
-      printList(createOkevList(5));
+      printList(createOkevList(8));
     }
 
     public static BinNode<Integer> createOkevList(int n) {
@@ -25,18 +27,5 @@ public class bn_targil1 {
             }
         }
         return head; // Return the head of the list
-    }
-
-    public static void printList(BinNode<Integer> head) {
-        // Print the list
-        BinNode<Integer> current = head;
-        while (current != null) {
-            System.out.print(current.getValue());
-            if (current.getRight() != null) { // Check for the presence of a right node
-                System.out.print(" <-> ");
-            }
-            current = current.getRight(); // Move to the next node
-        }
-        System.out.println(); // Print a new line after the list
     }
 }
