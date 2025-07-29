@@ -1,4 +1,4 @@
-package Exercices_OOP.Mivhan.M_2021A.S8_IntList;
+package _6_Reshima_Mekusheret.S8_IntList;
 import unit4.collectionsLib.Node;
 
 public class IntList {

@@ -2,7 +2,7 @@ package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
 
-public class Ex19_NotEven {
+public class Ex18_NotEven {
     // Ex19: Проверка, что у всех элементов, сумма их цифр не кратна 2.
     public static boolean reorgList(Node<Integer> head){
         Node<Integer> current = head;

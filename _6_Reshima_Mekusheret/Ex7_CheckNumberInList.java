@@ -4,10 +4,8 @@ import unit4.collectionsLib.Node;
 
 import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
 
-/**
- * The class contains functions for working with a linked list of floating point numbers,
- * including checking for the presence of a given number in the list.
- */
+// Проверка наличия заданного числа в списке
+
 public class Ex7_CheckNumberInList {
     public static boolean containsNumber(Node<Double> head, double target) {
         Node<Double> current = head;

@@ -1,6 +1,8 @@
 package _6_Reshima_Mekusheret;
 import unit4.collectionsLib.Node;
 
+import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
+
 // проверка равенства количества элементов выше и ниже среднего в списке
 public class Ex4_CheckAverage {
     public static void main(String[] args) {
@@ -49,18 +51,5 @@ public class Ex4_CheckAverage {
      * 2. Add the remaining elements to the end of the list
      * 3. Return the head of the list
      */
-    public static Node<Double> createList(double[] values) {
-        Node<Double> head = null;
-        Node<Double> current = null;
-        for (double value : values) {
-            if (head == null) {
-                head = new Node<>(value);
-                current = head;
-            } else {
-                current.setNext(new Node<>(value));
-                current = current.getNext();
-            }
-        }
-        return head;
-    }
+
 }

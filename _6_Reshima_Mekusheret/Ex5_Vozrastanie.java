@@ -16,19 +16,14 @@ public class Ex5_Vozrastanie {
     }
 
     public static boolean isAscending(Node<Integer> head) {
-        if (head == null || head.getNext() == null) {
-            return true; // An empty list or a list with one element is considered sorted
-        }
-
+        if (head == null || head.getNext() == null) return true;
         Node<Integer> current = head;
-
         while (current.getNext() != null) {
             if (current.getValue() > current.getNext().getValue()) {
                 return false; // Found a violation of the ascending order
             }
             current = current.getNext();
         }
-
         return true; // All elements are sorted in ascending order
     }
 

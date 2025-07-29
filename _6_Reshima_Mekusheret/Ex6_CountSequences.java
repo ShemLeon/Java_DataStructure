@@ -4,8 +4,7 @@ import static _6_Reshima_Mekusheret.Ex1_CreateListFromArray.createList;
 import static _6_Reshima_Mekusheret.Ex2_PrintList.printListInt;
 
 
-// * Класс содержит функции для работы со связным списком целых чисел,
-// * включая подсчет количества последовательностей заданного числа.
+// Подсчет количества последовательностей заданного числа.
 public class Ex6_CountSequences {
     public static void main(String[] args) {
         Node<Integer> list = createList(new int[]{2, 7, 5, 3, 2, 2, 1, 1, 2, 2}); // Example list
@@ -30,7 +29,6 @@ public class Ex6_CountSequences {
             }
             current = current.getNext();
         }
-
         return count;
     }
 }
