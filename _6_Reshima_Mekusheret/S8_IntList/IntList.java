@@ -1,6 +1,5 @@
-package _6_Reshima_Mekusheret.S8_IntList;
+package Exercices_OOP.Mivhan.M_2021A.S8_IntList;
 import unit4.collectionsLib.Node;
-
 
 public class IntList {
     private Node<Integer> head;
@@ -21,24 +20,44 @@ public class IntList {
         return s + h.getValue()+"}";
     }
 
-    public static void main(String[] args) {
-        System.out.println("=== Тестирование класса IntList ===\n");
-        // Тест 1: Создание пустого списка
-        IntList list = new IntList();
-        System.out.println("1. Пустой список: " + list.toString());
+    public boolean what1 (IntList list) {
+        // роверит, что начало второго списка будет идентично первому.
+        Node<Integer> h1 = head;
+        Node<Integer> h2 = list.head;
+        while ((h1 != null) && (h2 != null)) {
+            if (h1.getValue()!= h2.getValue())
+                return false;
+            h1 = h1.getNext();
+            h2 = h2.getNext();
+        }
+        return true;
+    }
 
-        // Тест 2: Добавление одного элемента
-        list.add(5);
-        System.out.println("2. После добавления 5: " + list.toString());
+    public boolean what2 (IntList list) {
+        // классическая проверка на **подмножество** (subset)
+        Node<Integer> h1 = head;
+        while (h1 != null) {
+            boolean found = false;
+            Node<Integer> h2 = list.head;
 
-        // Тест 3: Добавление нескольких элементов
-        list.add(10);
-        list.add(15);
-        list.add(20);
-        System.out.println("3. После добавления 10, 15, 20: " + list.toString());
-        System.out.println("   (элементы добавляются в начало)");
+            while ((h2 != null) && (!found)) {
+                if (h1.getValue()== h2.getValue())
+                    found = true;
+                h2 = h2.getNext();
+            }
+
+            if (!found) return false;
+            h1 = h1.getNext();
+        }
+        return true;
+    }
 
 
+    public static void main(String[] args){
+        IntList testList = new IntList();
+        testList.add(2); testList.add(3); testList.add(6);
+        testList.add(1); testList.add(4);
+        System.out.println(testList); // 4 1 6 3 2
 
 
     }
