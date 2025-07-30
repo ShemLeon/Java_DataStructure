@@ -58,7 +58,5 @@ public class IntList {
         testList.add(2); testList.add(3); testList.add(6);
         testList.add(1); testList.add(4);
         System.out.println(testList); // 4 1 6 3 2
-
-
     }
 }
